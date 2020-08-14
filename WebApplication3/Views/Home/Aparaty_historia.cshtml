@@ -1,0 +1,21 @@
+﻿@{
+    ViewData["Title"] = "Historia aparatów fotograficznych";
+}
+@section PageHead{
+    <div class="container">
+        <h3>Witaj, to jest @ViewData["Title"]</h3>
+        <h4>Tu dowiesz się conieco na ten temat.</h4>
+    </div>
+}
+@section PageFoot{
+    <div class="container">
+        <h4>Jeśli chciałbyś się dowiedzieć czegoś więcej:</h4>
+        <h5>Pisz na <a href="mailto:name@email.com">Nasz adres mailowy!</a></h5>
+        <h5>Zadzwoń! <em>+48 555-555-555</em></h5>
+    </div>
+}
+<div class="text-center">
+    <h2 class="display-4">@ViewData["Title"]</h2>
+    <h5>Zapraszamy do zapoznania się z garścią faktów</h5>
+    <p>@ViewBag.ValuePara1</p>
+</div>

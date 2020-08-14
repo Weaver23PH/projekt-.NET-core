@@ -1,0 +1,84 @@
+﻿@model WebApplication3.Models.ObiektywViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>ObiektywViewModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Producent" class="control-label"></label>
+                <input asp-for="Producent" class="form-control" />
+                <span asp-validation-for="Producent" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="KrajPochodzenia" class="control-label"></label>
+                <input asp-for="KrajPochodzenia" class="form-control" />
+                <span asp-validation-for="KrajPochodzenia" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Model" class="control-label"></label>
+                <input asp-for="Model" class="form-control" />
+                <span asp-validation-for="Model" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RokProdukcji" class="control-label"></label>
+                <input asp-for="RokProdukcji" class="form-control" />
+                <span asp-validation-for="RokProdukcji" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Waga" class="control-label"></label>
+                <input asp-for="Waga" class="form-control" />
+                <span asp-validation-for="Waga" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Staloogniskowy" /> @Html.DisplayNameFor(model => model.Staloogniskowy)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="OgniskowaMin" class="control-label"></label>
+                <input asp-for="OgniskowaMin" class="form-control" />
+                <span asp-validation-for="OgniskowaMin" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OgniskowaMax" class="control-label"></label>
+                <input asp-for="OgniskowaMax" class="form-control" />
+                <span asp-validation-for="OgniskowaMax" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PrzesłonaMax" class="control-label"></label>
+                <input asp-for="PrzesłonaMax" class="form-control" />
+                <span asp-validation-for="PrzesłonaMax" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PrzesłonaMin" class="control-label"></label>
+                <input asp-for="PrzesłonaMin" class="form-control" />
+                <span asp-validation-for="PrzesłonaMin" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BagnetId" class="control-label"></label>
+                <select asp-for="BagnetId" class="form-control" asp-items="ViewBag.BagnetId"></select>
+                <span asp-validation-for="BagnetId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Powrót do listy</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

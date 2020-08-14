@@ -1,0 +1,96 @@
+﻿@model IEnumerable<WebApplication3.Models.ObiektywViewModel>
+
+@{
+    ViewData["Title"] = "Lista";
+}
+
+<h1>Lista</h1>
+
+<p>
+    <a asp-action="Create">Utwórz nowy</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Producent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.KrajPochodzenia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Model)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RokProdukcji)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Waga)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Staloogniskowy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OgniskowaMin)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OgniskowaMax)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PrzesłonaMax)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PrzesłonaMin)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bagnet)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Producent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.KrajPochodzenia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Model)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RokProdukcji)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Waga)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Staloogniskowy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OgniskowaMin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OgniskowaMax)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PrzesłonaMax)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PrzesłonaMin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Bagnet.Typ)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Szczegóły</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Usuń</a> |
+                @Html.ActionLink("Dodaj do torby", "AddObiektywToEquipmentBag", "EquipmentBag", new { id = item.Id })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,76 @@
+﻿@using WebApplication3.Models;
+@using WebApplication3.Code;
+@using WebApplication3.Data;
+@model WebApplication3.Models.EquipmentBag
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Zabierz</h1>
+
+<h4>Torba</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+
+            </div>
+            <table class="table">
+                <tr>
+                    <th>
+                        Nazwa
+                    </th>
+                    <th>
+                        Ilość
+                    </th>
+                    <th>
+                        Waga
+                    </th>
+                </tr>
+
+                @foreach (var item in Model.AparatyEquippped)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Aparat.Model)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AparatAmount)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Aparat.Waga)
+                        </td>
+                    </tr>
+}
+                @foreach (var item in Model.ObiektywyEquipped) { 
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Obiektyw.Model)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ObiektywAmount)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Obiektyw.Waga)
+                        </td>
+                    </tr>
+                }
+            </table>
+            <h2> Całkowita waga torby: @Model.TotalWeight() gram </h2>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Powrót do listy</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

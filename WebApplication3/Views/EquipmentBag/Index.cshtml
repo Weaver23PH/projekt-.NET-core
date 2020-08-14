@@ -1,0 +1,67 @@
+﻿@using WebApplication3.Models;
+@using WebApplication3.Code;
+@using WebApplication3.Data;
+@model WebApplication3.Models.EquipmentBag
+
+@{ ViewBag.Title = "Zawartość torby fotograficznej"; }
+
+<h2>@ViewBag.Title</h2>
+
+<p>     Ilość sprzętu: @Model.TotalAmount()</p>
+
+<table class="table">
+    <tr>
+        <th>
+            Nazwa
+        </th>
+        <th>
+            Ilość
+        </th>
+        <th>
+            Operacje
+        </th>
+    </tr>
+    @{ var i = 0;}
+    @foreach (var item in Model.AparatyEquippped)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Aparat.Model)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AparatAmount)
+            </td>
+            <td>
+                @Html.ActionLink("View", "AparatDetails", new { index = i }) |
+                @Html.ActionLink("+ 1", "AddAparatUnit", new { index = i }) |
+                @Html.ActionLink("- 1", "SubstractAparatUnit", new { index = i }) |
+                @Html.ActionLink("Delete", "DeleteAparat", new { index = i }) |
+            </td>
+        </tr>
+}
+    @foreach (var item in Model.ObiektywyEquipped)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Obiektyw.Model)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ObiektywAmount)
+            </td>
+            <td>
+                @Html.ActionLink("View", "ObiektywDetails", new { index = i }) |
+                @Html.ActionLink("+ 1", "AddObiektywUnit", new { index = i }) |
+                @Html.ActionLink("- 1", "SubstractObiektywUnit", new { index = i }) |
+                @Html.ActionLink("Delete", "DeleteObiektyw", new { index = i }) |
+            </td>
+        </tr>
+        //     }
+        i++;
+    }
+</table>
+<h2> Całkowita waga torby: @Model.TotalWeight() gram </h2>
+<p>
+    @Html.ActionLink("Powrót do Aparatów", "Index", "AparatViewModel") |
+    @Html.ActionLink("Powrót do Obiektywów", "Index", "ObiektywViewModel") |
+    @Html.ActionLink("Zabierz Torbę", "Create", "EquipmentBag")
+</p> 

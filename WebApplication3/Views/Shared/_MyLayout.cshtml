@@ -1,0 +1,129 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@using Microsoft.AspNetCore.Http;
+@using WebApplication3.Code;
+@using React.AspNet;
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@{
+
+    var BagStr = "";
+    var bag = Context.Session.Get<EquipmentBag>("expeditionBag");
+    if (bag != null)
+    {
+
+        if (bag.TotalAmount() != 0) { BagStr = "(" + bag.TotalAmount() + ")"; }
+    }
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Strona</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+</head>
+<body>
+    <header>
+        <div>
+            <div class="row">
+                <div class="col-2">
+                    <img id="WerraLogo" src="~/img/werra_open_cap.JPG" width="300" height="250" alt="werra" />
+                </div>
+                <div class="col-10">
+                    @RenderSection("PageHead", required: false)
+                    @if (SignInManager.IsSignedIn(User))
+                    {<ul class="navbar-nav flex-grow-1 flex-sm-column">
+                            <li class="nav-item">
+                                <a class="nav-link text-warning" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Witaj, @User.Identity.Name!</a>
+                            </li>
+                            <li class="nav-item">
+                                <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                    <button type="submit" class="nav-link btn btn-link text-warning">Wyloguj się!</button>
+                                </form>
+                            </li>
+                        </ul>
+                    }
+                    else
+                    {<ul class="navbar-nav flex-grow-1 flex-sm-column">
+                            <li class="nav-item">
+                                <a class="nav-link text-warning" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Zaloguj się!</a>
+                            </li>
+                        </ul>
+                    }
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-3">
+                <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-transparent box-shadow border-right mb-3 flex-sm-column-reverse">
+                    <div class="container-fluid">
+                        <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-column-reverse">
+                            <ul class="navbar-nav flex-grow-1 flex-sm-column">
+                                <li class="nav-item">
+                                    <a class="nav-link text-warning" asp-area="" asp-controller="Home" asp-action="Index">Startowa</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-warning" asp-area="" asp-controller="Home" asp-action="Privacy">Polityka prywatności</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-warning" asp-area="" asp-controller="Home" asp-action="Aparaty_His">Historia Aparatów</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-warning" asp-area="" asp-controller="Home" asp-action="Aparaty_Foto_Podst">Fotografia tradycyjna - podstawy</a>
+                                </li>
+                                @if (SignInManager.IsSignedIn(User))
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link text-warning" asp-area="" asp-controller="AparatViewModel" asp-action="Index">Baza danych aparatów</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-warning" asp-area="" asp-controller="ObiektywViewModel" asp-action="Index">Baza danych obiektywów</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-warning" asp-area="" asp-controller="AparatKategoria" asp-action="Menu">Kategorie aparatów</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-warning" asp-area="" asp-controller="AparatKategoria" asp-action="Index">Dodaj nową kategorię</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-warning" asp-area="" asp-controller="Bagnets" asp-action="Index">Dodaj nowy typ bagnetu</a>
+                                    </li>
+                                }
+                                <li class="nav-item">
+                                    <a class="nav-link text-warning" asp-area="" asp-controller="EquipmentBag" asp-action="Index">   @("Torba" + BagStr)</a>
+                                </li>
+
+
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <div class="col-9">
+                <div class="container-fluid">
+                    <main role="main" class="pb-3">
+                        @RenderBody()
+                    </main>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="border-top footer">
+        <div class="container-fluid">
+            @RenderSection("PageFoot", required: false)
+            <a class="text-warning" asp-area="" asp-controller="Home" asp-action="Privacy">Polityka prywatności</a>
+            <p style="float:right"> &copy; @DateTime.Now.Year aparaty.co.uk</p>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

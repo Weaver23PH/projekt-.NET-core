@@ -1,0 +1,87 @@
+﻿@model WebApplication3.Models.ObiektywViewModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Usuń/h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>ObiektywViewModel</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Producent)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Producent)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.KrajPochodzenia)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.KrajPochodzenia)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Model)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Model)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.RokProdukcji)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.RokProdukcji)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Waga)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Waga)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Staloogniskowy)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Staloogniskowy)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.OgniskowaMin)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.OgniskowaMin)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.OgniskowaMax)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.OgniskowaMax)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PrzesłonaMax)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PrzesłonaMax)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PrzesłonaMin)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PrzesłonaMin)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Bagnet)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Bagnet.Typ)
+        </dd class>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index">Powrót do listy</a>
+    </form>
+</div>

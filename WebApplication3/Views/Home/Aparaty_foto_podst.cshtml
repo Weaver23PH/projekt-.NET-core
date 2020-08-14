@@ -1,0 +1,74 @@
+﻿@{
+    ViewData["Title"] = "Fotografia tradycyjna - podstawy";
+}
+@section PageHead{
+    <div class="container">
+        <h3>Temat tej strony to @ViewData["Title"]</h3>
+        <h4>Wyjaśnimy pojęcia takie, jak głębia ostości, przesłona itp...</h4>
+    </div>
+}
+
+*@*section PageFoot{
+    *    <div class="container">
+     *       <h4>Jeśli chciałbyś się dowiedzieć czegoś więcej:</h4>
+     *       <h5>Pisz na <a href="mailto:name@email.com">Nasz adres mailowy!</a></h5>
+    *        <h5>Zadzwoń! <em>+48 555-555-555</em></h5>
+    *    </div>
+    *
+    *}
+*@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<div class="text-center" style="height: 100%;">
+    <h2 class="display-4">@ViewData["Title"]</h2>
+    <h5>Zapraszamy do zapoznania się z garścią faktów</h5>
+    <dl>
+        <dt>Temat pierwszy</dt>
+        <dd>@ViewBag.ValuePara1</dd>
+        <dt>Temat drugi</dt>
+        <dd>@ViewBag.ValuePara1</dd>
+
+
+    </dl>
+
+    <button type="button" class="btn btn-primary" id="btnShowModal">
+        EV calculator
+    </button>
+    <div id="calc_wrapper" class="modal ">
+        <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/16.13.0/umd/react.development.js"></script>
+        <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.13.0/umd/react-dom.development.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/remarkable/1.7.1/remarkable.min.js"></script>
+        <div id="calc_content"></div>
+
+        <script src="@Url.Content("~/js/dist/calculator.jsx")"></script>
+
+        <button type="button" class="btn btn-primary" id="btnHideModal">
+            Close
+        </button>
+    </div>
+    <dl>
+        <dt>Temat pierwszy</dt>
+        <dd>@ViewBag.ValuePara1</dd>
+        <dt>Temat drugi</dt>
+        <dd>@ViewBag.ValuePara1</dd>
+        <dt>Temat trzeci</dt>
+        <dd>@ViewBag.ValuePara1</dd>
+
+    </dl>
+</div>
+@section Scripts
+{
+    <script>
+        $(document).ready(function () {
+
+                $("#btnShowModal").click(function () {
+                    $("#calc_wrapper").modal('show');
+                });
+
+                $("#btnHideModal").click(function () {
+                    $("#calc_wrapper").modal('hide');
+                });
+            });
+
+
+    </script>
+}

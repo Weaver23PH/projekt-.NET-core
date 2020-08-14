@@ -1,0 +1,23 @@
+﻿@{
+    ViewData["Title"] = "Startowa";
+}
+@section PageHead{
+    <div class="container">
+        <h3>Witaj, to jest @ViewData["Title"] strona tej aplikacji</h3>
+        <h4>Tu się wszystko zaczyna.</h4>
+    </div>
+}
+@section PageFoot{
+    <div class="container">
+        <h4>Jeśli chciałbyś się dowiedzieć czegoś więcej:</h4>
+        <h5>Pisz na <a href="mailto:name@email.com">Nasz adres mailowy!</a></h5>
+        <h5>Zadzwoń! <em>+48 555-555-555</em></h5>
+    </div>
+}
+<div class="text-center">
+    <h1 class="display-4">Witaj!</h1>
+    <h5>Zapraszamy do zapoznania się z naszą bazą informacji o <abbr title="Zwanych też, nie do końca słusznie 'analogowymi'">tradycyjnych</abbr> aparatach fotograficznych</h5>
+    <p>@ViewBag.ValuePara1</p>
+    <p>@ViewBag.ValuePara1</p>
+
+</div>
