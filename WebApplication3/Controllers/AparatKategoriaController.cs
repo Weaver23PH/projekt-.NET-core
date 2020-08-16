@@ -15,8 +15,6 @@ namespace WebApplication3.Controllers
     public class AparatKategoriaController : Controller
     {
         private readonly ApplicationDbContext _context;
-        CookieOptions option = new CookieOptions();
-        option.Expires = DateTime.Now.AddMinutes(3);
 
         public AparatKategoriaController(ApplicationDbContext context)
         {
@@ -165,7 +163,9 @@ namespace WebApplication3.Controllers
             AparatKategoria kategoria = null;
             int? katUpper = 0;
             int? x;
-
+            int? CookieValHolder;
+            CookieOptions option = new CookieOptions();
+            option.Expires = DateTime.Now.AddMinutes(3);
             List<AparatViewModel> ListaDisplAP = new List<AparatViewModel>();
             if (id == null)
             {
@@ -221,6 +221,7 @@ namespace WebApplication3.Controllers
             }
 
             ViewBag.Aparaty = ListaDisplAP;
+            // ViewBag.Aparaty = (from aparat in _context.Aparaty where aparat.AparatKategoriaId == x select aparat).ToList();
 
             return View(kategoria);
         }
