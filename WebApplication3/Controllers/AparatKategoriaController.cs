@@ -15,6 +15,8 @@ namespace WebApplication3.Controllers
     public class AparatKategoriaController : Controller
     {
         private readonly ApplicationDbContext _context;
+        CookieOptions option = new CookieOptions();
+        option.Expires = DateTime.Now.AddMinutes(3);
 
         public AparatKategoriaController(ApplicationDbContext context)
         {
@@ -163,21 +165,15 @@ namespace WebApplication3.Controllers
             AparatKategoria kategoria = null;
             int? katUpper = 0;
             int? x;
-            CookieOptions option = new CookieOptions();
-            List<AparatViewModel> ListAP = new List<AparatViewModel>();
+
+            List<AparatViewModel> ListaDisplAP = new List<AparatViewModel>();
             if (id == null)
             {
                 id = 1;
             }
-            if (Request.Cookies["currentPageCookie"] == null)
-            {
-                option.Expires = DateTime.Now.AddMinutes(10);
-                Response.Cookies.Append("currentPageCookie", id.ToString(), option);
-            }
-            else
-            {
-                Response.Cookies.Append("currentPageCookie", id.ToString(), option);
-            }
+
+            Response.Cookies.Append("currentPageCookie", id.ToString(), option);
+
             if (Request.Cookies["currentPageCookie"] != null)
             {
                 kategoria = _context.Kategorie.Find(int.Parse(Request.Cookies["currentPageCookie"]));
@@ -202,15 +198,29 @@ namespace WebApplication3.Controllers
             }
             ViewBag.SubCategories = (from category in _context.Kategorie where category.UpperCategoryId == x select category).ToList();
             ViewBag.UpperCategory = _context.Kategorie.FirstOrDefault(x => (x.Id == kategoria.UpperCategoryId));
-
-            List<AparatKategoria> lista = (from category in _context.Kategorie where category.UpperCategoryId != null select category).ToList();
-            foreach (AparatKategoria cat in lista)
+            List<AparatViewModel> ListaAP = (from aparat in _context.Aparaty select aparat).ToList();
+            foreach (AparatViewModel ap in ListaAP)
             {
+                int LocalCat = ap.AparatKategoriaId;
+                if (LocalCat == x)
+                {
+                    ListaDisplAP.Add(ap);
+                }
+                else
+                {
+                    while (_context.Kategorie.Find(LocalCat).UpperCategoryId.HasValue)
+                    {
+                        LocalCat = (int)_context.Kategorie.Find(LocalCat).UpperCategoryId;
+                        if (LocalCat == x)
+                        {
+                            ListaDisplAP.Add(ap);
+                        }
+                    }
+                }
 
-                ListAP.AddRange((from aparat in _context.Aparaty where aparat.AparatKategoriaId == cat.Id select aparat).ToList());
-                ViewBag.Aparaty = ListAP;
             }
-            //  ViewBag.Aparaty = (from aparat in _context.Aparaty where aparat.AparatKategoriaId == x select aparat).ToList();
+
+            ViewBag.Aparaty = ListaDisplAP;
 
             return View(kategoria);
         }
@@ -218,3 +228,4 @@ namespace WebApplication3.Controllers
 
     }
 }
+
