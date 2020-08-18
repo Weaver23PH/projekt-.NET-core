@@ -35,7 +35,9 @@ namespace WebApplication3.Controllers
             {
                 return NotFound();
             }
-
+            CookieOptions option = new CookieOptions();
+            option.Expires = DateTime.Now.AddMinutes(3);
+            Response.Cookies.Append("currentPageCookie", id.ToString(), option);
             var aparatKategoria = await _context.Kategorie
                 .Include(a => a.UpperCategory)
                 .FirstOrDefaultAsync(m => m.Id == id);
@@ -163,27 +165,23 @@ namespace WebApplication3.Controllers
             AparatKategoria kategoria = null;
             int? katUpper = 0;
             int? x;
-            int? CookieValHolder;
-            CookieOptions option = new CookieOptions();
-            option.Expires = DateTime.Now.AddMinutes(3);
+
+
             List<AparatViewModel> ListaDisplAP = new List<AparatViewModel>();
             if (id == null)
             {
                 id = 1;
             }
-
-            Response.Cookies.Append("currentPageCookie", id.ToString(), option);
+           
 
             if (Request.Cookies["currentPageCookie"] != null)
             {
-                kategoria = _context.Kategorie.Find(int.Parse(Request.Cookies["currentPageCookie"]));
-                katUpper = _context.Kategorie.Find(int.Parse(Request.Cookies["currentPageCookie"])).UpperCategoryId;
+                id = int.Parse(Request.Cookies["currentPageCookie"]);
             }
-            else
-            {
-                kategoria = _context.Kategorie.Find(id);
-                katUpper = _context.Kategorie.Find(id).UpperCategoryId;
-            }
+
+            kategoria = _context.Kategorie.Find(id);
+            katUpper = _context.Kategorie.Find(id).UpperCategoryId;
+
             if (kategoria == null)
             {
                 return NotFound();
@@ -222,6 +220,7 @@ namespace WebApplication3.Controllers
 
             ViewBag.Aparaty = ListaDisplAP;
             // ViewBag.Aparaty = (from aparat in _context.Aparaty where aparat.AparatKategoriaId == x select aparat).ToList();
+
 
             return View(kategoria);
         }
