@@ -42,7 +42,7 @@
                             </li>
                             <li class="nav-item">
                                 <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                                    <button type="submit" class="nav-link btn btn-link text-warning">Wyloguj się!</button>
+                                    <button type="submit" class="nav-link btn btn-primary text-warning">Wyloguj się!</button>
                                 </form>
                             </li>
                         </ul>
@@ -98,8 +98,17 @@
                                 <li class="nav-item">
                                     <a class="nav-link text-warning" asp-area="" asp-controller="EquipmentBag" asp-action="Index">   @("Torba" + BagStr)</a>
                                 </li>
-
-
+                                @if (SignInManager.IsSignedIn(User))
+                                {@if (UserManager.GetRolesAsync().Equals("Admin"));
+                                    {
+                                        <li class="nav-item">
+                                            <a class="nav-link text-warning" asp-area="" asp-controller="Admin" asp-action="Index">Admin</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link text-warning" asp-area="" asp-controller="Admin" asp-action="Create">Admin C</a>
+                                        </li>
+                                    }
+                            }
                             </ul>
                         </div>
                     </div>
