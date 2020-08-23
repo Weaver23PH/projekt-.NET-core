@@ -1,4 +1,6 @@
-﻿@model Identity.Models.AppUser;
+﻿
+@using Microsoft.AspNetCore.Identity;
+@model IdentityUser;
 
 <h1 class="bg-info text-white">Update User</h1>
 <a asp-action="Index" class="btn btn-secondary">Back</a>
@@ -17,6 +19,6 @@
         <label for="password">Password</label>
         <input name="password" class="form-control" />
     </div>
-   
+
     <button type="submit" class="btn btn-primary">Save</button>
 </form>

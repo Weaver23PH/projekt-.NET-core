@@ -68,37 +68,35 @@
                         <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-column-reverse">
                             <ul class="navbar-nav flex-grow-1 flex-sm-column">
                                 <li class="nav-item">
-                                    <a class="nav-link text-warning" asp-area="" asp-controller="Home" asp-action="Index">Startowa</a>
+                                    <a class="nav-link text-warning" asp-area="" asp-controller="Home" asp-action="Index">Start</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link text-warning" asp-area="" asp-controller="Home" asp-action="Aparaty_His">Short History of Photography</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-warning" asp-area="" asp-controller="Home" asp-action="Privacy">Polityka prywatności</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-warning" asp-area="" asp-controller="Home" asp-action="Aparaty_His">Historia Aparatów</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-warning" asp-area="" asp-controller="Home" asp-action="Aparaty_Foto_Podst">Fotografia tradycyjna - podstawy</a>
+                                    <a class="nav-link text-warning" asp-area="" asp-controller="Home" asp-action="Aparaty_Foto_Podst">Photography - Basics</a>
                                 </li>
                                 @if (SignInManager.IsSignedIn(User))
                                 {
                                     <li class="nav-item">
-                                        <a class="nav-link text-warning" asp-area="" asp-controller="AparatViewModel" asp-action="Index">Baza danych aparatów</a>
+                                        <a class="nav-link text-warning" asp-area="" asp-controller="AparatViewModel" asp-action="Index">Camera Database</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link text-warning" asp-area="" asp-controller="ObiektywViewModel" asp-action="Index">Baza danych obiektywów</a>
+                                        <a class="nav-link text-warning" asp-area="" asp-controller="ObiektywViewModel" asp-action="Index">Lens Database</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link text-warning" asp-area="" asp-controller="AparatKategoria" asp-action="Menu">Kategorie aparatów</a>
+                                        <a class="nav-link text-warning" asp-area="" asp-controller="AparatKategoria" asp-action="Menu">Camera Categories</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link text-warning" asp-area="" asp-controller="AparatKategoria" asp-action="Index">Dodaj nową kategorię</a>
+                                        <a class="nav-link text-warning" asp-area="" asp-controller="AparatKategoria" asp-action="Index">Add A New Camera Category</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link text-warning" asp-area="" asp-controller="Bagnets" asp-action="Index">Dodaj nowy typ bagnetu</a>
+                                        <a class="nav-link text-warning" asp-area="" asp-controller="Bagnets" asp-action="Index">Add A New Lens Mount Type</a>
                                     </li>
                                 }
                                 <li class="nav-item">
-                                    <a class="nav-link text-warning" asp-area="" asp-controller="EquipmentBag" asp-action="Index">   @("Torba" + BagStr)</a>
+                                    <a class="nav-link text-warning" asp-area="" asp-controller="EquipmentBag" asp-action="Index">   @("Equipment Bag" + BagStr)</a>
                                 </li>
                                 @if (SignInManager.IsSignedIn(User))
                                 {
@@ -112,9 +110,12 @@
                                         <li class="nav-item">
                                             <a class="nav-link text-warning" asp-area="" asp-controller="Admin" asp-action="Create">Create A User</a>
                                         </li>
-                                      
+
                                     }
                                 }
+                                <li class="nav-item">
+                                    <a class="nav-link text-warning" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy Policy</a>
+                                </li>
                             </ul>
                         </div>
                     </div>
