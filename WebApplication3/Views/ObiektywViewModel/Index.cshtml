@@ -86,8 +86,8 @@
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Szczegóły</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Usuń</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> |
                 @Html.ActionLink("Dodaj do torby", "AddObiektywToEquipmentBag", "EquipmentBag", new { id = item.Id })
             </td>
         </tr>

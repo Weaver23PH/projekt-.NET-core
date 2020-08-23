@@ -6,26 +6,26 @@
     var upCat = ViewBag.UpperCategory as AparatKategoria;
 }
 
-<h2>Menu w/g kategorii</h2>
+<h2>Menu according to Categories</h2>
 <div class="container-fluid">
     <div class="row">
         <div class="col-4">
             <h4>Kategoria</h4>
             <hr />
             <dl class="dl-horizontal">
-                <dt> Powrót: </dt>
+                <dt> Back: </dt>
                 <dd>
                     @if (Model.UpperCategory != null)
                     {
                         @Html.ActionLink(upCat.Name, "Menu", new { id = upCat.Id })
                     }
                 </dd>
-                <dt> Tu jesteś: </dt>
+                <dt> You are HERE: </dt>
                 <dd>
                     @Html.DisplayFor(model => model.Name)
                 </dd>
             </dl>
-            <p>  Podkategorie:  </p> 
+            <p>  Sub-categories:  </p> 
             <hr />
             <dl class="dl-horizontal">
                 @{ var nr = 1;}
@@ -37,7 +37,7 @@
             </dl>
         </div>
         <div class="col-8">
-            <h4>Aparaty</h4>
+            <h4>Cameras</h4>
             <hr />
             <dl class="dl-horizontal">
                 @{ var nrA = 1;}
