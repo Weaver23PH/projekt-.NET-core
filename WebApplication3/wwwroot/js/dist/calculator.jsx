@@ -93,7 +93,7 @@ class Calculator extends React.Component {
                     <label>Time (sec)</label><input type="number" id='timeVal' name="timeVal" value={this.state.timeVal} onChange={(event) => this.handleTimeChange(event)} />
                     <button onClick={(event) => this.calculate(event)}>Calculate</button>
                 </form>
-                <table>
+                <table id="EVData">
                     <thead>
                         <tr>
                             <th>Lighting condition</th>

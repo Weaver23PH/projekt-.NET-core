@@ -90,7 +90,7 @@ form {
     margin: 2px;
 }
 
-table, td, th {
+table#EVData, table#EVData td, table#EVData th {
     border: 1px solid black;
     text-align: center;
     background-color: white;

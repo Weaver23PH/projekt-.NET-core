@@ -8,8 +8,8 @@
 
     var BagStr = "";
     var bag = Context.Session.Get<EquipmentBag>("expeditionBag");
-    IdentityUser user = await UserManager.FindByNameAsync(User.Identity.Name);
-    var roles = await UserManager.GetRolesAsync(user);
+    IdentityUser user;
+    IList<String> roles;
     if (bag != null)
     {
 
@@ -102,14 +102,17 @@
                                 </li>
                                 @if (SignInManager.IsSignedIn(User))
                                 {
+                                    user = await UserManager.FindByNameAsync(User.Identity.Name);
+                                    roles = await UserManager.GetRolesAsync(user);
                                     @if (roles.Contains("Admin"))
                                     {
                                         <li class="nav-item">
-                                            <a class="nav-link text-warning" asp-area="" asp-controller="Admin" asp-action="Index">Admin</a>
+                                            <a class="nav-link text-warning" asp-area="" asp-controller="Admin" asp-action="Index">Administrate Users</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link text-warning" asp-area="" asp-controller="Admin" asp-action="Create">Admin C</a>
+                                            <a class="nav-link text-warning" asp-area="" asp-controller="Admin" asp-action="Create">Create A User</a>
                                         </li>
+                                      
                                     }
                                 }
                             </ul>
