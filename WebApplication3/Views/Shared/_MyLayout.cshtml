@@ -22,7 +22,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Strona</title>
+    <title>@ViewData["Title"] - Nav</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
@@ -36,26 +36,31 @@
                     <img id="WerraLogo" src="~/img/werra_open_cap.JPG" width="300" height="250" alt="werra" />
                 </div>
                 <div class="col-10">
-                    @RenderSection("PageHead", required: false)
-                    @if (SignInManager.IsSignedIn(User))
-                    {<ul class="navbar-nav flex-grow-1 flex-sm-column">
-                            <li class="nav-item">
-                                <a class="nav-link text-warning" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Witaj, @User.Identity.Name!</a>
-                            </li>
-                            <li class="nav-item">
-                                <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                                    <button type="submit" class="nav-link btn btn-primary text-warning">Wyloguj się!</button>
-                                </form>
-                            </li>
-                        </ul>
-                    }
-                    else
-                    {<ul class="navbar-nav flex-grow-1 flex-sm-column">
-                            <li class="nav-item">
-                                <a class="nav-link text-warning" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Zaloguj się!</a>
-                            </li>
-                        </ul>
-                    }
+                    <div>
+                        @RenderSection("PageHead", required: false)
+                    </div>
+                    <div>
+                        @if (SignInManager.IsSignedIn(User))
+
+                        {<ul class="navbar-nav flex-grow-1 flex-sm-column ">
+                                <li class="nav-item">
+                                    <a class="nav-link text-warning" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello, @User.Identity.Name!</a>
+                                </li>
+                                <li class="nav-item">
+                                    <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                        <button type="submit" class="nav-link btn btn-primary text-warning">Log out!</button>
+                                    </form>
+                                </li>
+                            </ul>
+                        }
+                        else
+                        {<ul class="navbar-nav flex-grow-1 flex-sm-column">
+                                <li class="nav-item">
+                                    <a class="nav-link text-warning" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Log in!</a>
+                                </li>
+                            </ul>
+                        }
+                    </div>
                 </div>
             </div>
         </div>
@@ -133,7 +138,7 @@
     <footer class="border-top footer">
         <div class="container-fluid">
             @RenderSection("PageFoot", required: false)
-            <a class="text-warning" asp-area="" asp-controller="Home" asp-action="Privacy">Polityka prywatności</a>
+            <a class="text-warning" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy policy</a>
             <p style="float:right"> &copy; @DateTime.Now.Year aparaty.co.uk</p>
         </div>
     </footer>

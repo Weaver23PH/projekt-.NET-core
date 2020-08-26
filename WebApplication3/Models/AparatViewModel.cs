@@ -13,7 +13,7 @@ namespace WebApplication3.Models
         [Key]
         public int Id { get; set; }
         [MaxLength(50)]
-        [Required(ErrorMessage = "Nazwa is required!")]
+        [Required(ErrorMessage = "Name is required!")]
         [Display(Name = "Producer")]
         [StringLength(50,
             ErrorMessage = "Must have at least 3 letters/signs", MinimumLength = 3)]
@@ -24,18 +24,18 @@ namespace WebApplication3.Models
            ErrorMessage = "Must have at least 3 letters/signs", MinimumLength = 3)]
         public string KrajPochodzenia { get; set; }
         [MaxLength (100)]
-        [Display(Name = " model")]
+        [Display(Name = "Model")]
         public string Model { get; set; }
-        [Display(Name = " rozpoczęcie produkcji")]
+        [Display(Name = "Produced since")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:0/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime RokProdukcji { get; set; }
-        [Display(Name = " waga w gramach")]
-        [Required(ErrorMessage = "Waga is required!")]
+        [Display(Name = "Weight in grams")]
+        [Required(ErrorMessage = "Weight is required!")]
         public int Waga { get; set; }
-        [Display(Name = "wycofany z produkcji?")]
+        [Display(Name = "Withdrawn from production?")]
         public bool Wycofany { get; set; }
-        [Display(Name = "Bagnet")]
+        [Display(Name = "Mount")]
         public int BagnetId { get; set; }
         [ForeignKey("BagnetId")]
         public virtual Bagnet Bagnet { get; set; }

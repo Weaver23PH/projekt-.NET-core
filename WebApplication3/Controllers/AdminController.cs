@@ -43,7 +43,7 @@ namespace Identity.Controllers
                 IdentityUser IdentityUser = new IdentityUser
                 {
                     UserName = user.Name,
-                    Email = user.Email
+                    Email = user.Email,
                 };
 
                 IdentityResult result = await userManager.CreateAsync(IdentityUser, user.Password);
@@ -53,6 +53,7 @@ namespace Identity.Controllers
                     var confirmationLink = Url.Action("ConfirmEmail", "Email", new { token, email = user.Email }, Request.Scheme);
                     EmailHelper emailHelper = new EmailHelper();
                     bool emailResponse = emailHelper.SendEmail(user.Email, confirmationLink);
+                    await userManager.AddToRoleAsync(IdentityUser, user.Role);
 
                     if (emailResponse)
                         return RedirectToAction("Index");
@@ -136,7 +137,7 @@ namespace Identity.Controllers
         }*/
 
         [HttpPost]
-        public async Task<IActionResult> Update(string id, string email, string password)
+        public async Task<IActionResult> Update(string id, string email, string password, string role)
         {
             IdentityUser user = await userManager.FindByIdAsync(id);
             if (user != null)

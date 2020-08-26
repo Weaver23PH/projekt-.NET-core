@@ -5,11 +5,15 @@
 
 @{
     ViewData["Title"] = "Create";
+    List<string> ObiektywBagnetList = new List<string>();
+    List<string> AparatBagnetList = new List<string>();
+    List<string> IntersectBagnetList = new List<string>();
+
 }
 
-<h1>Zabierz</h1>
+<h1>Complete</h1>
 
-<h4>Torba</h4>
+<h4>Equipment bag</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -21,18 +25,25 @@
             <table class="table">
                 <tr>
                     <th>
-                        Nazwa
+                        Name
                     </th>
                     <th>
-                        Ilość
+                        Amount
                     </th>
                     <th>
-                        Waga
+                        Weight
+                    </th>
+                    <th>
+                        Mount
                     </th>
                 </tr>
 
                 @foreach (var item in Model.AparatyEquippped)
                 {
+                    if (item.Aparat.Bagnet.Typ != null)
+                    {
+                        AparatBagnetList.Add(item.Aparat.Bagnet.Typ);
+                    }
                     <tr>
                         <td>
                             @Html.DisplayFor(modelItem => item.Aparat.Model)
@@ -43,9 +54,15 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.Aparat.Waga)
                         </td>
+
                     </tr>
-}
-                @foreach (var item in Model.ObiektywyEquipped) { 
+                }
+                @foreach (var item in Model.ObiektywyEquipped)
+                {
+                    if (item.Obiektyw.Bagnet.Typ != null)
+                    {
+                        ObiektywBagnetList.Add(item.Obiektyw.Bagnet.Typ);
+                    }
                     <tr>
                         <td>
                             @Html.DisplayFor(modelItem => item.Obiektyw.Model)
@@ -56,13 +73,20 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.Obiektyw.Waga)
                         </td>
+
                     </tr>
                 }
             </table>
-            <h2> Całkowita waga torby: @Model.TotalWeight() gram </h2>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
+            <h2> Total weight of the bag: @Model.TotalWeight() grams </h2>
+            @{IntersectBagnetList = ObiektywBagnetList.Intersect(AparatBagnetList).ToList<string>();
+                if (IntersectBagnetList.Count() > 0)
+                {
+                    <div class="form-group">
+                        <h2>Your equipment is mismatched on the {@IntersectBagnetList.ToString()} mount!</h2>
+                    </div>
+                }
+            }
+
         </form>
     </div>
 </div>

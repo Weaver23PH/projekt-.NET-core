@@ -3,22 +3,22 @@
 @using WebApplication3.Data;
 @model WebApplication3.Models.EquipmentBag
 
-@{ ViewBag.Title = "Zawartość torby fotograficznej"; }
+@{ ViewBag.Title = "Contents of the bag"; }
 
 <h2>@ViewBag.Title</h2>
 
-<p>     Ilość sprzętu: @Model.TotalAmount()</p>
+<p>     Amount of equipment: @Model.TotalAmount()</p>
 
 <table class="table">
     <tr>
         <th>
-            Nazwa
+            Name
         </th>
         <th>
-            Ilość
+            Amount
         </th>
         <th>
-            Operacje
+            Operations
         </th>
     </tr>
     @{ var i = 0;}
@@ -59,9 +59,9 @@
         i++;
     }
 </table>
-<h2> Całkowita waga torby: @Model.TotalWeight() gram </h2>
+<h2> Total weight of the bag: @Model.TotalWeight() grams </h2>
 <p>
-    @Html.ActionLink("Powrót do Aparatów", "Index", "AparatViewModel") |
-    @Html.ActionLink("Powrót do Obiektywów", "Index", "ObiektywViewModel") |
-    @Html.ActionLink("Zabierz Torbę", "Create", "EquipmentBag")
+    @Html.ActionLink("Return to Cameras", "Index", "AparatViewModel") |
+    @Html.ActionLink("Return to Lenses", "Index", "ObiektywViewModel") |
+    @Html.ActionLink("Collect the Bag", "Create", "EquipmentBag")
 </p> 
