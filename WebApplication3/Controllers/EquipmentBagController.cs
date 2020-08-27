@@ -116,6 +116,59 @@ namespace WebApplication3.Controllers
         }
         public IActionResult Create()
         {
+            HashSet<int> ObiektywBagnetList = new HashSet<int>();
+            HashSet<int> AparatBagnetList = new HashSet<int>();
+            IEnumerable<int> MissingAparatBagnet;
+            IEnumerable<int> MissingObiektywBagnet;
+            List<String> MissingBagnetNames = new List<string>();
+
+            var bag = getBag();
+            foreach (AparatInBag aparat in bag.AparatyEquippped)
+            {
+                AparatBagnetList.Add(aparat.Aparat.BagnetId);
+            }
+            foreach (ObiektywtInBag obiektyw in bag.ObiektywyEquipped)
+            {
+                ObiektywBagnetList.Add(obiektyw.Obiektyw.BagnetId);
+            }
+
+            MissingAparatBagnet = ObiektywBagnetList.Except(AparatBagnetList);
+            MissingObiektywBagnet = AparatBagnetList.Except(ObiektywBagnetList); 
+
+            if (MissingAparatBagnet.Count() > 0)
+            {
+                foreach (int index in MissingAparatBagnet)
+                {
+                    var MissingBagnetTypeList = (from bagnet in _context.Bagnety where bagnet.Id == index select bagnet).ToList();
+                    foreach (Bagnet bagnet in MissingBagnetTypeList)
+                    {
+                        MissingBagnetNames.Add(bagnet.Typ);
+                    }
+                    ViewBag.MissingCameraMount = $"Your equipment is mismatched on {String.Join(",", MissingBagnetNames)} camera mount";
+                }
+            }
+            else
+            {
+                ViewBag.MissingCameraMount = null;
+            }
+            if (MissingObiektywBagnet.Count() > 0)
+            {
+                foreach (int index in MissingObiektywBagnet)
+                {
+                    var MissingBagnetTypeList = (from bagnet in _context.Bagnety where bagnet.Id == index select bagnet).ToList();
+                    foreach (Bagnet bagnet in MissingBagnetTypeList)
+                    {
+                        MissingBagnetNames.Add(bagnet.Typ);
+                    }
+                    ViewBag.MissingLensMount = $"Your equipment is mismatched on {String.Join(",", MissingBagnetNames)} lens mount";
+                }
+            }
+            else
+            {
+                ViewBag.MissingLensMount = null;
+            }
+
+
             return View(getBag());
         }
     }

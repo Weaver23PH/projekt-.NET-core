@@ -15,6 +15,9 @@
             Name
         </th>
         <th>
+            Type
+        </th>
+        <th>
             Amount
         </th>
         <th>
@@ -25,6 +28,9 @@
     @foreach (var item in Model.AparatyEquippped)
     {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Aparat.Producent)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Aparat.Model)
             </td>
@@ -38,10 +44,13 @@
                 @Html.ActionLink("Delete", "DeleteAparat", new { index = i }) |
             </td>
         </tr>
-}
+    }
     @foreach (var item in Model.ObiektywyEquipped)
     {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Obiektyw.Producent)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Obiektyw.Model)
             </td>

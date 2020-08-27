@@ -219,7 +219,7 @@ namespace WebApplication3.Controllers
             }
 
             ViewBag.Aparaty = ListaDisplAP;
-            // ViewBag.Aparaty = (from aparat in _context.Aparaty where aparat.AparatKategoriaId == x select aparat).ToList();
+
 
 
             return View(kategoria);
