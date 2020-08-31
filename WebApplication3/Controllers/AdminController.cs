@@ -39,14 +39,14 @@ namespace Identity.Controllers
         public async Task<IActionResult> Create(User user)
         {
             string Role;
-            if (user.Admin)
-            {
-                Role = "Admin";
-            }
-            else
-            {
-                Role = "User";
-            }
+         //   if (user.Admin)
+         //   {
+          //      Role = "Admin";
+         //   }
+          //  else
+          //  {
+         //       Role = "User";
+         //   }
             if (ModelState.IsValid)
             {
                 IdentityUser IdentityUser = new IdentityUser
@@ -62,7 +62,7 @@ namespace Identity.Controllers
                     var confirmationLink = Url.Action("ConfirmEmail", "Email", new { token, email = user.Email }, Request.Scheme);
                     EmailHelper emailHelper = new EmailHelper();
                     bool emailResponse = emailHelper.SendEmail(user.Email, confirmationLink);
-                    await userManager.AddToRoleAsync(IdentityUser, Role);
+                 //   await userManager.AddToRoleAsync(IdentityUser, Role);
 
                     if (emailResponse)
                         return RedirectToAction("Index");

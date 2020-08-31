@@ -19,8 +19,8 @@ namespace Identity.Models
         [Required]
         public string Password { get; set; }
 
-        [Required]
-        [Display(Name = "Admin")]
-        public bool Admin { get; set; }
+    //    [Required]
+      //  [Display(Name = "Admin")]
+       // public bool Admin { get; set; }
     }
 }
