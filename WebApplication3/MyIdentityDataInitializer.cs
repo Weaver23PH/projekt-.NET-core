@@ -41,6 +41,7 @@ namespace WebApplication3
         {
             SeedOneUser(userManager, "normaluser@localhost", "nUpass1!");
             SeedOneUser(userManager, "adminuser@localhost", "aUpass1!", "Admin");
+            SeedOneUser(userManager, "adminuser2@localhost", "ADmin123!", "Admin");
         }
     }
 }
