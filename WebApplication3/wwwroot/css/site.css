@@ -131,5 +131,19 @@ div#calculator {
     filter: brightness(200%);
     text-shadow: 3px 3px 3px rgba(206,89,55,0);
 }
+.boxedContent {
+    border-radius: 5px;
+    border-top: 2px solid white;
+    border-left: 2px solid white;
+    border-bottom: 2px solid black;
+    border-right: 2px solid black;
+}
+#WerraLogo {
+    background-image: url("../img/werra_open_cap.JPG");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
+    width: 100%;
+    height: 100%;
 
-
+}

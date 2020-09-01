@@ -32,10 +32,10 @@
     <header>
         <div>
             <div class="row">
-                <div class="col-2">
-                    <img id="WerraLogo" src="~/img/werra_open_cap.JPG" width="300" height="250" alt="werra" />
+                <div class="col-2 boxedContent">
+                   <div id="WerraLogo"></div>
                 </div>
-                <div class="col-10">
+                <div class="col-10 boxedContent">
                     <div>
                         @RenderSection("PageHead", required: false)
                     </div>
@@ -67,8 +67,8 @@
     </header>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-3">
-                <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-transparent box-shadow border-right mb-3 flex-sm-column-reverse">
+            <div class="col-3 boxedContent">
+                <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-transparent box-shadow mb-3 flex-sm-column-reverse">
                     <div class="container-fluid">
                         <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-column-reverse">
                             <ul class="navbar-nav flex-grow-1 flex-sm-column" id="navbar">
@@ -90,12 +90,21 @@
                                     <li class="nav-item">
                                         <a class="nav-link text-warning" asp-area="" asp-controller="ObiektywViewModel" asp-action="Index">Lens Database</a>
                                     </li>
+
                                     <li class="nav-item">
                                         <a class="nav-link text-warning" asp-area="" asp-controller="AparatKategoria" asp-action="Menu">Camera Categories</a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link text-warning" asp-area="" asp-controller="AparatKategoria" asp-action="Index">Add A New Camera Category</a>
-                                    </li>
+                                    @if (SignInManager.IsSignedIn(User))
+                                    {
+                                        user = await UserManager.FindByNameAsync(User.Identity.Name);
+                                        roles = await UserManager.GetRolesAsync(user);
+                                        @if (roles.Contains("Category-Manager"))
+                                        {
+                                            <li class="nav-item">
+                                                <a class="nav-link text-warning" asp-area="" asp-controller="AparatKategoria" asp-action="Index">Add A New Camera Category</a>
+                                            </li>
+                                        }
+                                    }
                                     <li class="nav-item">
                                         <a class="nav-link text-warning" asp-area="" asp-controller="Bagnets" asp-action="Index">Add A New Lens Mount Type</a>
                                     </li>
@@ -132,7 +141,7 @@
                     </div>
                 </nav>
             </div>
-            <div class="col-9">
+            <div class="col-9 boxedContent">
                 <div class="container-fluid">
                     <main role="main" class="pb-3">
                         @RenderBody()
@@ -141,12 +150,20 @@
             </div>
         </div>
     </div>
-    <footer class="border-top footer">
-        <div class="container-fluid">
-            @RenderSection("PageFoot", required: false)
-            <a class="text-warning" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy policy</a>
-            <p style="float:right"> &copy; @DateTime.Now.Year aparaty.co.uk</p>
-        </div>
+    <footer class="boxedContent footer container-fluid">
+
+            <div class="row">
+                <div class="col-2">
+                    <a class="text-warning" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy policy</a>
+                </div>
+                <div class="col-8">
+                    @RenderSection("PageFoot", required: false)
+                </div>
+                <div class="col-2">
+                    <p style="float:right"> &copy; @DateTime.Now.Year aparaty.co.uk</p>
+                </div>
+            </div>
+
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

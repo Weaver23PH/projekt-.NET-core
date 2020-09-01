@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Identity.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Identity.Controllers
 {
@@ -19,12 +20,14 @@ namespace Identity.Controllers
             roleManager = roleMgr;
             userManager = userMrg;
         }
-
+        [Authorize(Roles = "Admin")]
         public ViewResult Index() => View(roleManager.Roles);
 
+        [Authorize(Roles = "Admin")]
         public IActionResult Create() => View();
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create([Required]string name)
         {
             if (ModelState.IsValid)
@@ -39,6 +42,7 @@ namespace Identity.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(string id)
         {
             IdentityRole role = await roleManager.FindByIdAsync(id);
@@ -54,7 +58,7 @@ namespace Identity.Controllers
                 ModelState.AddModelError("", "No role found");
             return View("Index", roleManager.Roles);
         }
-
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Update(string id)
         {
             IdentityRole role = await roleManager.FindByIdAsync(id);
@@ -74,6 +78,7 @@ namespace Identity.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Update(RoleModification model)
         {
             IdentityResult result;
@@ -111,6 +116,10 @@ namespace Identity.Controllers
         {
             foreach (IdentityError error in result.Errors)
                 ModelState.AddModelError("", error.Description);
+        }
+        public IActionResult AccessDenied()
+        {
+            return View();
         }
     }
 }

@@ -8,7 +8,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WebApplication3.Data;
 using WebApplication3.Models;
+using Microsoft.AspNetCore.Identity;
 
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebApplication3.Controllers
 {
@@ -22,6 +24,7 @@ namespace WebApplication3.Controllers
         }
 
         // GET: AparatKategoria
+        [Authorize(Roles = "Category-Manager")]
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Kategorie.Include(a => a.UpperCategory);
@@ -29,6 +32,7 @@ namespace WebApplication3.Controllers
         }
 
         // GET: AparatKategoria/Details/5
+        [Authorize(Roles = "Category-Manager")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -50,6 +54,7 @@ namespace WebApplication3.Controllers
         }
 
         // GET: AparatKategoria/Create
+        [Authorize(Roles = "Category-Manager")]
         public IActionResult Create()
         {
             ViewData["UpperCategoryId"] = new SelectList(_context.Kategorie, "Id", "Name");
@@ -61,6 +66,7 @@ namespace WebApplication3.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Category-Manager")]
         public async Task<IActionResult> Create([Bind("Id,Name,UpperCategoryId")] AparatKategoria aparatKategoria)
         {
             if (ModelState.IsValid)
@@ -74,6 +80,7 @@ namespace WebApplication3.Controllers
         }
 
         // GET: AparatKategoria/Edit/5
+        [Authorize(Roles = "Category-Manager")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -95,6 +102,7 @@ namespace WebApplication3.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Category-Manager")]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,UpperCategoryId")] AparatKategoria aparatKategoria)
         {
             if (id != aparatKategoria.Id)
@@ -127,6 +135,7 @@ namespace WebApplication3.Controllers
         }
 
         // GET: AparatKategoria/Delete/5
+        [Authorize(Roles = "Category-Manager")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -148,6 +157,7 @@ namespace WebApplication3.Controllers
         // POST: AparatKategoria/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Category-Manager")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var aparatKategoria = await _context.Kategorie.FindAsync(id);
