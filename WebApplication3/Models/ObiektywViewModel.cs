@@ -50,6 +50,7 @@ namespace WebApplication3.Models
         [Display(Name = "Mount")]
         public int BagnetId { get; set; }
         [ForeignKey("BagnetId")]
+        [Display(Name = "Mount")]
         public virtual Bagnet Bagnet { get; set; }
     }
 }

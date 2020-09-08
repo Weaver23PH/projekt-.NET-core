@@ -35,12 +35,13 @@ namespace WebApplication3.Models
         public int Waga { get; set; }
         [Display(Name = "Withdrawn from production?")]
         public bool Wycofany { get; set; }
-        [Display(Name = "Mount")]
         public int BagnetId { get; set; }
         [ForeignKey("BagnetId")]
+        [Display(Name = "Mount")]
         public virtual Bagnet Bagnet { get; set; }
         public int AparatKategoriaId { get; set; }
         [ForeignKey("AparatKategoriaId")]
+        [Display(Name = "Category")]
         public virtual AparatKategoria Kategoria { get; set; }
     }
 }

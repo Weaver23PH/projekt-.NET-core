@@ -28,141 +28,128 @@
     <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
 </head>
-<body>
-    <header>
-        <div>
-            <div class="row">
-                <div class="col-2 boxedContent">
-                   <div id="WerraLogo"></div>
-                </div>
-                <div class="col-10 boxedContent">
-                    <div>
-                        @RenderSection("PageHead", required: false)
-                    </div>
-                    <div>
-                        @if (SignInManager.IsSignedIn(User))
+<body style="height: 90vh; width: 98vw;">
+    <header class="row h-25">
 
-                        {<ul class="navbar-nav flex-grow-1 flex-sm-column ">
-                                <li class="nav-item">
-                                    <a class="nav-link text-warning" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello, @User.Identity.Name!</a>
-                                </li>
-                                <li class="nav-item">
-                                    <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                                        <button type="submit" class="nav-link btn btn-primary text-warning">Log out!</button>
-                                    </form>
-                                </li>
-                            </ul>
-                        }
-                        else
-                        {<ul class="navbar-nav flex-grow-1 flex-sm-column">
-                                <li class="nav-item">
-                                    <a class="nav-link text-warning" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Log in!</a>
-                                </li>
-                            </ul>
-                        }
-                    </div>
-                </div>
+        <div class="col-2 boxedContent">
+            <div id="WerraLogo"></div>
+        </div>
+        <div class="col-2 boxedContent">
+            <div class="mx-auto d-flex justify-content-center">
+                @if (SignInManager.IsSignedIn(User))
+
+                {<ul class="navbar-nav flex-grow-1 flex-sm-column d-flex justify-content-center">
+                        <li class="nav-item text-center">
+                            <a class="nav-link text-warning" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello, @User.Identity.Name!</a>
+                        </li>
+                        <li class="nav-item d-flex justify-content-center">
+                            <form class="form-inline d-flex justify-content-center" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                <button type="submit" class="nav-link btn btn-primary text-warning">Log out!</button>
+                            </form>
+                        </li>
+                    </ul>
+                }
+                else
+                {<ul class="navbar-nav flex-grow-1 flex-sm-column d-flex justify-content-center">
+                        <li class="nav-item d-flex justify-content-center text-center">
+                            <a class="nav-link text-warning" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Log in!</a>
+                        </li>
+                    </ul>
+                }
+            </div>
+        </div>
+        <div class="col-8 boxedContent">
+            <div>
+                @RenderSection("PageHead", required: false)
             </div>
         </div>
     </header>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-3 boxedContent">
-                <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-transparent box-shadow mb-3 flex-sm-column-reverse">
-                    <div class="container-fluid">
-                        <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-column-reverse">
-                            <ul class="navbar-nav flex-grow-1 flex-sm-column" id="navbar">
+    <main class="row h-75">
+        <div class="col-3 boxedContent h-100">
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-transparent box-shadow mb-3 flex-sm-column-reverse">
+                <div class="container-fluid">
+                    <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-column-reverse">
+                        <ul class="navbar-nav flex-grow-1 flex-sm-column" id="navbar">
+                            <li class="nav-item">
+                                <a class="nav-link text-warning" asp-area="" asp-controller="Home" asp-action="Index">Start</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-warning" asp-area="" asp-controller="Home" asp-action="Aparaty_His">Short History of Photography</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-warning" asp-area="" asp-controller="Home" asp-action="Aparaty_Foto_Podst">Photography - Basics</a>
+                            </li>
+                            @if (SignInManager.IsSignedIn(User))
+                            {
                                 <li class="nav-item">
-                                    <a class="nav-link text-warning" asp-area="" asp-controller="Home" asp-action="Index">Start</a>
+                                    <a class="nav-link text-warning" asp-area="" asp-controller="AparatViewModel" asp-action="Index">Camera Database</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-warning" asp-area="" asp-controller="ObiektywViewModel" asp-action="Index">Lens Database</a>
                                 </li>
 
                                 <li class="nav-item">
-                                    <a class="nav-link text-warning" asp-area="" asp-controller="Home" asp-action="Aparaty_His">Short History of Photography</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-warning" asp-area="" asp-controller="Home" asp-action="Aparaty_Foto_Podst">Photography - Basics</a>
-                                </li>
-                                @if (SignInManager.IsSignedIn(User))
-                                {
-                                    <li class="nav-item">
-                                        <a class="nav-link text-warning" asp-area="" asp-controller="AparatViewModel" asp-action="Index">Camera Database</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link text-warning" asp-area="" asp-controller="ObiektywViewModel" asp-action="Index">Lens Database</a>
-                                    </li>
-
-                                    <li class="nav-item">
-                                        <a class="nav-link text-warning" asp-area="" asp-controller="AparatKategoria" asp-action="Menu">Camera Categories</a>
-                                    </li>
-                                    @if (SignInManager.IsSignedIn(User))
-                                    {
-                                        user = await UserManager.FindByNameAsync(User.Identity.Name);
-                                        roles = await UserManager.GetRolesAsync(user);
-                                        @if (roles.Contains("Category-Manager"))
-                                        {
-                                            <li class="nav-item">
-                                                <a class="nav-link text-warning" asp-area="" asp-controller="AparatKategoria" asp-action="Index">Add A New Camera Category</a>
-                                            </li>
-                                        }
-                                    }
-                                    <li class="nav-item">
-                                        <a class="nav-link text-warning" asp-area="" asp-controller="Bagnets" asp-action="Index">Add A New Lens Mount Type</a>
-                                    </li>
-                                }
-                                <li class="nav-item">
-                                    <a class="nav-link text-warning" asp-area="" asp-controller="EquipmentBag" asp-action="Index">   @("Equipment Bag" + BagStr)</a>
+                                    <a class="nav-link text-warning" asp-area="" asp-controller="AparatKategoria" asp-action="Menu">Camera Categories</a>
                                 </li>
                                 @if (SignInManager.IsSignedIn(User))
                                 {
                                     user = await UserManager.FindByNameAsync(User.Identity.Name);
                                     roles = await UserManager.GetRolesAsync(user);
-                                    @if (roles.Contains("Admin"))
+                                    @if (roles.Contains("Category-Manager"))
                                     {
                                         <li class="nav-item">
-                                            <a class="nav-link text-warning" asp-area="" asp-controller="Admin" asp-action="Index">Administrate Users</a>
+                                            <a class="nav-link text-warning" asp-area="" asp-controller="AparatKategoria" asp-action="Index">Add A New Camera Category</a>
                                         </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link text-warning" asp-area="" asp-controller="Admin" asp-action="Create">Create A User</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link text-warning" asp-area="" asp-controller="Role" asp-action="Index">Administrate User Roles</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link text-warning" asp-area="" asp-controller="Role" asp-action="Create">Create A User Role</a>
-                                        </li>
-
                                     }
                                 }
                                 <li class="nav-item">
-                                    <a class="nav-link text-warning" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy Policy</a>
+                                    <a class="nav-link text-warning" asp-area="" asp-controller="Bagnets" asp-action="Index">Add A New Lens Mount Type</a>
                                 </li>
-                            </ul>
-                        </div>
+                            }
+                            <li class="nav-item">
+                                <a class="nav-link text-warning" asp-area="" asp-controller="EquipmentBag" asp-action="Index">   @("Equipment Bag" + BagStr)</a>
+                            </li>
+                            @if (SignInManager.IsSignedIn(User))
+                            {
+                                user = await UserManager.FindByNameAsync(User.Identity.Name);
+                                roles = await UserManager.GetRolesAsync(user);
+                                @if (roles.Contains("Admin"))
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link text-warning" asp-area="" asp-controller="Admin" asp-action="Index">Administrate Users</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-warning" asp-area="" asp-controller="Role" asp-action="Index">Administrate User Roles</a>
+                                    </li>
+                                }
+                            }
+                            <li class="nav-item">
+                                <a class="nav-link text-warning" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy Policy</a>
+                            </li>
+                        </ul>
                     </div>
-                </nav>
-            </div>
-            <div class="col-9 boxedContent">
-                <div class="container-fluid">
-                    <main role="main" class="pb-3">
-                        @RenderBody()
-                    </main>
                 </div>
-            </div>
+            </nav>
         </div>
-    </div>
-    <footer class="boxedContent footer container-fluid">
+        <div class="col-9 boxedContent overflow-auto mainContent h-100">
+                <main role="main" class="pb-3">
+                    @RenderBody()
+                </main>
+           </div>
+    </main>
+    <footer class="boxedContent footer row footerContent">
 
-            <div class="row">
-                <div class="col-2">
-                    <a class="text-warning" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy policy</a>
-                </div>
-                <div class="col-8">
-                    @RenderSection("PageFoot", required: false)
-                </div>
-                <div class="col-2">
-                    <p style="float:right"> &copy; @DateTime.Now.Year aparaty.co.uk</p>
-                </div>
-            </div>
+        <div class="col-2">
+            <a class="text-warning" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy policy</a>
+        </div>
+        <div class="col-8">
+            @RenderSection("PageFoot", required: false)
+        </div>
+        <div class="col-2">
+            <p style="float:right"> &copy; @DateTime.Now.Year aparaty.co.uk</p>
+        </div>
+
 
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

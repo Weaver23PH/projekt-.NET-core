@@ -3,20 +3,20 @@
 }
 @section PageHead{
     <div class="container">
-        <h3>The subkect of the page is @ViewData["Title"]</h3>
+        <h3>The subject of the page is @ViewData["Title"]</h3>
         <h4>We'll explain some concepts, like depth of field, shutter, aperture...</h4>
     </div>
 }
 
-*@*section PageFoot{
-    *    <div class="container">
-     *       <h4>Jeśli chciałbyś się dowiedzieć czegoś więcej:</h4>
-     *       <h5>Pisz na <a href="mailto:name@email.com">Nasz adres mailowy!</a></h5>
-    *        <h5>Zadzwoń! <em>+48 555-555-555</em></h5>
-    *    </div>
-    *
-    *}
-*@
+@section PageFoot{
+<div>
+    <h5>If You are interested in more information</h5>
+    <h6>Write to <a href="mailto:name@email.com">our e-mail address</a></h6>
+    <h6>Call <em>+48 555-555-555</em></h6>
+</div>
+
+    }
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <div class="text-center" style="height: 100%;">
     <h2 class="display-4">@ViewData["Title"]</h2>
@@ -50,7 +50,7 @@
         <dd>In optics, an aperture is a hole or an opening through which light travels. More specifically, the aperture and focal length of an optical system determine the cone angle of a bundle of rays that come to a focus in the image plane.</dd>
         <dt>Shutter</dt>
         <dd>In photography, a shutter is a device that allows light to pass for a determined period, exposing photographic film or a photosensitive digital sensor to light in order to capture a permanent image of a scene. </dd>
-        <dt>Sshutter speed</dt>
+        <dt>Shutter speed</dt>
         <dd>In photography, shutter speed or exposure time is the length of time when the film or digital sensor inside the camera is exposed to light, also when a camera's shutter is open when taking a photograph.[1] The amount of light that reaches the film or image sensor is proportional to the exposure time. ​1⁄500 of a second will let half as much light in as ​1⁄250.</dd>
 
     </dl>

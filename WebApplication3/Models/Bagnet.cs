@@ -12,6 +12,7 @@ namespace WebApplication3.Models
 
         [Key] public int Id { get; set; }
         [MaxLength(40)]
+        [Display(Name = "Mount type")]
         public string Typ { get; set; }
         public virtual ICollection<AparatViewModel> Aparaty { get; set; }
         public virtual ICollection<ObiektywViewModel> Obiektywy { get; set; }

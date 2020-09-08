@@ -6,11 +6,11 @@
     var upCat = ViewBag.UpperCategory as AparatKategoria;
 }
 
-<h2>Menu according to Categories</h2>
+<h1 class="bg-info text-white">Menu according to Categories</h1>
 <div class="container-fluid">
     <div class="row">
         <div class="col-4">
-            <h4>Kategoria</h4>
+            <h4>Category</h4>
             <hr />
             <dl class="dl-horizontal">
                 <dt> Back: </dt>
@@ -21,7 +21,7 @@
                     }
                 </dd>
                 <dt> You are HERE: </dt>
-                <dd>
+                <dd class="text-warning">
                     @Html.DisplayFor(model => model.Name)
                 </dd>
             </dl>
