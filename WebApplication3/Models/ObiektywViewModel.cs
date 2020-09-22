@@ -14,16 +14,22 @@ namespace WebApplication3.Models
         public int Id { get; set; }
         [MaxLength(50)]
         [Required(ErrorMessage = "Name is required!")]
+        [RegularExpression(@"([A-Z'?a-z](-?|\s?)){3,50}",
+         ErrorMessage = "Characters are not allowed.")]
         [Display(Name = " Producer")]
         [StringLength(50,
             ErrorMessage = "Must have at least 3 letters/signs", MinimumLength = 3)]
         public string Producent { get; set; }
         [MaxLength(50)]
         [Display(Name = "Country")]
+        [RegularExpression(@"([A-Z'?a-z](-?|\s?)){3,50}",
+         ErrorMessage = "Characters are not allowed.")]
         [StringLength(50,
            ErrorMessage = "Must have at least 3 letters/signs", MinimumLength = 3)]
         public string KrajPochodzenia { get; set; }
-        [MaxLength(100)]
+        [MaxLength(50)]
+        [RegularExpression(@"([A-Z'?a-z](-?|\s)?\d*){1,50}",
+         ErrorMessage = "Characters are not allowed.")]
         [Display(Name = " Model")]
         public string Model { get; set; }
         [Display(Name = "Produced since")]
@@ -31,21 +37,32 @@ namespace WebApplication3.Models
         [DisplayFormat(DataFormatString = "{0:0/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime RokProdukcji { get; set; }
         [Display(Name = " Weight in grams")]
+        [MaxLength(10)]
+        [RegularExpression(@"\d{1,4}(\.\d{0,2})?",
+         ErrorMessage = "Characters are not allowed.")]
         [Required(ErrorMessage = "Weight is required!")]
         public int Waga { get; set; }
         [Display(Name = "Prime lens?")]
         public bool Staloogniskowy { get; set; }
+        [RegularExpression(@"\d{1,4}(\.\d{0,2})?",
+      ErrorMessage = "Characters are not allowed.")]
         [Display(Name = " Focal lenght minimum")]
         [Required(ErrorMessage = "Focal lenght minimum is required!")]
         public int OgniskowaMin { get; set; }
         [Display(Name = " Focal lenght maximum")]
+        [RegularExpression(@"\d{1,4}(\.\d{0,2})?",
+         ErrorMessage = "Characters are not allowed.")]
         [Required(ErrorMessage = "Focal lenght maximum is required!")]
         public int OgniskowaMax { get; set; }
-        [Display(Name = " Shutter maximum")]
-        [Required(ErrorMessage = "Shutter maximum is required!")]
+        [Display(Name = " Shutter speed maximum")]
+        [RegularExpression(@"\d{1,5}",
+         ErrorMessage = "Characters are not allowed.")]
+        [Required(ErrorMessage = "Shutter speed maximum is required!")]
         public int PrzesłonaMax { get; set; }
-        [Display(Name = " Shutter minimum")]
-        [Required(ErrorMessage = "Shutter minimum is required!")]
+        [Display(Name = " Shutter speed minimum")]
+        [RegularExpression(@"\d{1,5}",
+         ErrorMessage = "Characters are not allowed.")]
+        [Required(ErrorMessage = "Shutter speed minimum is required!")]
         public int PrzesłonaMin { get; set; }
         [Display(Name = "Mount")]
         public int BagnetId { get; set; }

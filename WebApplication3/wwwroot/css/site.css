@@ -98,13 +98,17 @@ form#calcForm {
     align-items: center;
 }
 
-form#calcForm label {
-    font-weight: 600;
-    color: orangered;
+    form#calcForm label {
+        font-weight: 600;
+        color: mediumblue;
+    }
+
+    form#calcForm input {
+       margin: 10px;
     }
 
 form {
-    margin: 2px;
+    margin: 5px;
     width: 85%;
 }
 
@@ -123,6 +127,7 @@ div#calculator {
     height: 100%;
     background-color: rgba(111, 111, 111, 0.5);
 }
+
 #navbar .nav-item:hover {
     transition: 0s border;
     transition-delay: 0.25s;
@@ -133,6 +138,7 @@ div#calculator {
     filter: brightness(200%);
     text-shadow: 3px 3px 3px rgba(206,89,55,0);
 }
+
 .boxedContent {
     border-radius: 5px;
     border-top: 2px solid white;
@@ -140,6 +146,7 @@ div#calculator {
     border-bottom: 2px solid black;
     border-right: 2px solid black;
 }
+
 #WerraLogo {
     background-image: url("../img/werra_open_cap.JPG");
     background-repeat: no-repeat;
@@ -148,11 +155,13 @@ div#calculator {
     width: 100%;
     height: 100%;
 }
+
 .mainContent {
     min-height: 50%;
     overflow: auto !important;
     display: inline-block;
 }
+
 .footerContent {
     max-height: 20%;
     height: 10%;

@@ -11,7 +11,9 @@ namespace WebApplication3.Models
     {
 
         [Key] public int Id { get; set; }
-        [MaxLength(40)]
+        [MaxLength(20)]
+        [RegularExpression(@"^[[A-Z](\p{Letter})+-*|\s\d*|\d*]{1,20}$",
+         ErrorMessage = "Characters are not allowed.")]
         [Display(Name = "Mount type")]
         public string Typ { get; set; }
         public virtual ICollection<AparatViewModel> Aparaty { get; set; }

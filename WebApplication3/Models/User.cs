@@ -10,6 +10,8 @@ namespace Identity.Models
     public class User
     {
         [Required]
+        [RegularExpression(@"([A-Z'?a-z]-?){3,50}",
+         ErrorMessage = "Characters are not allowed.")]
         public string Name { get; set; }
 
         [Required]
@@ -17,10 +19,10 @@ namespace Identity.Models
         public string Email { get; set; }
 
         [Required]
+        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*_?&])[A-Za-z\d@$!%*?_&]{8,}$",
+         ErrorMessage = "Characters are not allowed.")]
         public string Password { get; set; }
 
-    //    [Required]
-      //  [Display(Name = "Admin")]
-       // public bool Admin { get; set; }
+
     }
 }

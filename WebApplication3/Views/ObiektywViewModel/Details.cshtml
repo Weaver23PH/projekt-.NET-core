@@ -80,5 +80,6 @@
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back To List</a>
+    <a asp-action="Index">Back To List</a> |
+    @Html.ActionLink("Add To Bag", "AddObiektywToEquipmentBag", "EquipmentBag", new { id = Model.Id })
 </div>
