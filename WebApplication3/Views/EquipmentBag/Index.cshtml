@@ -4,6 +4,11 @@
 @model WebApplication3.Models.EquipmentBag
 
 @{ ViewBag.Title = "Contents of the bag"; }
+@section PageHead{
+    <div class="container">
+        <h3>Hello, this is @ViewData["Title"]</h3>
+        <h4>Here, You can see all the equipment currently in the bag</h4>
+    </div>}
 
 <h1 class="bg-info text-white">@ViewBag.Title</h1>
 

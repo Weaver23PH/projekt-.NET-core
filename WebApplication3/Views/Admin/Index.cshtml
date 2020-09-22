@@ -4,6 +4,12 @@
 @{
     IList<String> roles;
 }
+@{ ViewBag.Title = "User List"; }
+@section PageHead{
+    <div class="container">
+        <h3>Hello, this is @ViewData["Title"]</h3>
+        <h4>Here, You can see all users currently in the database and administrate them</h4>
+    </div>}
 <h1 class="bg-info text-white">All Users</h1>
 <a asp-action="Create" class="btn btn-secondary">Create a User</a>
 

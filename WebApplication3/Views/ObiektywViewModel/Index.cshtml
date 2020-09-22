@@ -1,9 +1,13 @@
 ﻿@model IEnumerable<WebApplication3.Models.ObiektywViewModel>
 
 @{
-    ViewData["Title"] = "List";
+    ViewData["Title"] = "Lens List";
 }
-
+@section PageHead{
+    <div class="container">
+        <h3>Hello, this is @ViewData["Title"]</h3>
+        <h4>Here, You can see all lens models currently in the database</h4>
+    </div>}
 <h1 class="bg-info text-white">List</h1>
 
 <p>
@@ -49,48 +53,49 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Producent)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.KrajPochodzenia)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Model)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RokProdukcji)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Waga)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Staloogniskowy)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OgniskowaMin)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OgniskowaMax)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PrzesłonaMax)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PrzesłonaMin)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Bagnet.Typ)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> |
-                @Html.ActionLink("Add To Bag", "AddObiektywToEquipmentBag", "EquipmentBag", new { id = item.Id })
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Producent)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.KrajPochodzenia)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Model)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RokProdukcji)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Waga)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Staloogniskowy)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OgniskowaMin)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OgniskowaMax)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PrzesłonaMax)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PrzesłonaMin)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Bagnet.Typ)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> |
+                    @Html.ActionLink("Add To Bag", "AddObiektywToEquipmentBag", "EquipmentBag", new { id = item.Id })
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

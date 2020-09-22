@@ -2,10 +2,14 @@
 @using static WebApplication3.Models.AparatViewModel
 
 @{
-    ViewData["Title"] = "Menu";
+    ViewData["Title"] = "Category Menu";
     var upCat = ViewBag.UpperCategory as AparatKategoria;
 }
-
+@section PageHead{
+    <div class="container">
+        <h3>Hello, this is @ViewData["Title"]</h3>
+        <h4>Here, You can browse the cameras by category</h4>
+    </div>}
 <h1 class="bg-info text-white">Menu according to Categories</h1>
 <div class="container-fluid">
     <div class="row">
@@ -25,7 +29,7 @@
                     @Html.DisplayFor(model => model.Name)
                 </dd>
             </dl>
-            <p>  Sub-categories:  </p> 
+            <p>  Sub-categories:  </p>
             <hr />
             <dl class="dl-horizontal">
                 @{ var nr = 1;}

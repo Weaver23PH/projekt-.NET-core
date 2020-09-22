@@ -1,6 +1,11 @@
 ﻿@model IEnumerable<IdentityRole>
 @using Microsoft.AspNetCore.Identity;
-
+@{ ViewBag.Title = "User Role List"; }
+@section PageHead{
+    <div class="container">
+        <h3>Hello, this is @ViewData["Title"]</h3>
+        <h4>Here, You can see all user roles currently in the database and administrate them</h4>
+    </div>}
 <h1 class="bg-info text-white">All Roles</h1>
 <a asp-action="Create" class="btn btn-secondary">Create a Role</a>
 

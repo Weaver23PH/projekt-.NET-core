@@ -1,78 +1,85 @@
 ﻿@model IEnumerable<WebApplication3.Models.AparatViewModel>
 
 @{
-    ViewData["Title"] = "List";
+    ViewData["Title"] = "Camera List";
 }
 
-<h1 class="bg-info text-white">List</h1>
+@section PageHead{
+    <div class="container">
+        <h3>Hello, this is @ViewData["Title"]</h3>
+        <h4>Here, You can see all camera models currently in the database</h4>
+    </div>}
 
-<p>
-    <a class="btn btn-secondary" asp-action="Create">Create</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Producent)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.KrajPochodzenia)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Model)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RokProdukcji)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Waga)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Wycofany)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Bagnet)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Kategoria)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Producent)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.KrajPochodzenia)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Model)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RokProdukcji)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Waga)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Wycofany)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Bagnet.Typ)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Kategoria.Name)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> |
-                @Html.ActionLink("Add To Bag", "AddAparatToEquipmentBag", "EquipmentBag", new { id = item.Id })
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <h1 class="bg-info text-white">List</h1>
+
+    <p>
+        <a class="btn btn-secondary" asp-action="Create">Create</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Producent)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.KrajPochodzenia)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Model)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.RokProdukcji)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Waga)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Wycofany)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Bagnet)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Kategoria)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Producent)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.KrajPochodzenia)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Model)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RokProdukcji)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Waga)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Wycofany)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Bagnet.Typ)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Kategoria.Name)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> |
+                        @Html.ActionLink("Add To Bag", "AddAparatToEquipmentBag", "EquipmentBag", new { id = item.Id })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
