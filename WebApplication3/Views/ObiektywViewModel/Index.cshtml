@@ -1,7 +1,11 @@
-﻿@model IEnumerable<WebApplication3.Models.ObiektywViewModel>
-
+﻿@using Microsoft.AspNetCore.Identity;
+@model IEnumerable<WebApplication3.Models.ObiektywViewModel>
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
 @{
     ViewData["Title"] = "Lens List";
+    IdentityUser user;
+    IList<String> roles;
 }
 @section PageHead{
     <div class="container">
@@ -92,8 +96,14 @@
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                     <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> |
-                    @Html.ActionLink("Add To Bag", "AddObiektywToEquipmentBag", "EquipmentBag", new { id = item.Id })
+                    @Html.ActionLink("Add To Bag", "AddObiektywToEquipmentBag", "EquipmentBag", new { id = item.Id }) |
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        user = await UserManager.FindByNameAsync(User.Identity.Name);
+                        roles = await UserManager.GetRolesAsync(user);
+                        @if (roles.Contains("Admin"))
+                        {<a asp-action="Delete" asp-route-id="@item.Id">Delete</a>  }
+                    }
                 </td>
             </tr>
         }

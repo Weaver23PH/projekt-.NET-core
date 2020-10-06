@@ -127,17 +127,23 @@ div#calculator {
     height: 100%;
     background-color: rgba(111, 111, 111, 0.5);
 }
-
-#navbar .nav-item:hover {
-    transition: 0s border;
-    transition-delay: 0.25s;
-    border-top: 1px solid white;
-    border-left: 1px solid white;
-    border-bottom: 1px solid black;
-    border-right: 1px solid black;
-    filter: brightness(200%);
-    text-shadow: 3px 3px 3px rgba(206,89,55,0);
+#navbar {
+    padding: 10px;
+    overflow: hidden;
 }
+#navbar .nav-item{
+    margin: 2px 2px 2px 2px;
+}
+    #navbar .nav-item:hover {
+        transition: border 0.66s ease-out;
+        transition-delay: 0.25s;
+        border-top: 1px solid white;
+        border-left: 1px solid white;
+        border-bottom: 1px solid black;
+        border-right: 1px solid black;
+        filter: brightness(200%);
+        text-shadow: 3px 3px 3px rgba(206,89,55,0);
+    }
 
 .boxedContent {
     border-radius: 5px;

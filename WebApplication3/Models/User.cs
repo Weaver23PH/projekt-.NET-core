@@ -19,8 +19,10 @@ namespace Identity.Models
         public string Email { get; set; }
 
         [Required]
-        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*_?&])[A-Za-z\d@$!%*?_&]{8,}$",
+        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*_?&])[A-Za-z\d@$!%*?_&]{8,50}$",
          ErrorMessage = "Characters are not allowed.")]
+        [StringLength(50,
+            ErrorMessage = "Must have at least 8 signs", MinimumLength = 8)]
         public string Password { get; set; }
 
 

@@ -1,7 +1,11 @@
-﻿@model IEnumerable<WebApplication3.Models.AparatViewModel>
-
+﻿@using Microsoft.AspNetCore.Identity;
+@model IEnumerable<WebApplication3.Models.AparatViewModel>
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
 @{
     ViewData["Title"] = "Camera List";
+    IdentityUser user;
+    IList<String> roles;
 }
 
 @section PageHead{
@@ -10,76 +14,82 @@
         <h4>Here, You can see all camera models currently in the database</h4>
     </div>}
 
-    <h1 class="bg-info text-white">List</h1>
+<h1 class="bg-info text-white">List</h1>
 
-    <p>
-        <a class="btn btn-secondary" asp-action="Create">Create</a>
-    </p>
-    <table class="table">
-        <thead>
+<p>
+    <a class="btn btn-secondary" asp-action="Create">Create</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Producent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.KrajPochodzenia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Model)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RokProdukcji)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Waga)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Wycofany)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bagnet)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Kategoria)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
             <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Producent)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.KrajPochodzenia)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Model)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.RokProdukcji)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Waga)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Wycofany)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Bagnet)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Kategoria)
-                </th>
-                <th></th>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Producent)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.KrajPochodzenia)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Model)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RokProdukcji)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Waga)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Wycofany)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Bagnet.Typ)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Kategoria.Name)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    @Html.ActionLink("Add To Bag", "AddAparatToEquipmentBag", "EquipmentBag", new { id = item.Id }) |
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        user = await UserManager.FindByNameAsync(User.Identity.Name);
+                        roles = await UserManager.GetRolesAsync(user);
+                        @if (roles.Contains("Admin"))
+                        {<a asp-action="Delete" asp-route-id="@item.Id">Delete</a>}
+                    }
+                </td>
             </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Producent)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.KrajPochodzenia)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Model)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.RokProdukcji)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Waga)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Wycofany)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Bagnet.Typ)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Kategoria.Name)
-                    </td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> |
-                        @Html.ActionLink("Add To Bag", "AddAparatToEquipmentBag", "EquipmentBag", new { id = item.Id })
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+        }
+    </tbody>
+</table>

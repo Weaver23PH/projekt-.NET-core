@@ -12,7 +12,7 @@ namespace WebApplication3.Models
 
         [Key] public int Id { get; set; }
         [MaxLength(20)]
-        [RegularExpression(@"^[[A-Z](\p{Letter})+-*|\s\d*|\d*]{1,20}$",
+        [RegularExpression(@"([A-Z'?a-z](-?|\s)?\d*){1,50}",
          ErrorMessage = "Characters are not allowed.")]
         [Display(Name = "Mount type")]
         public string Typ { get; set; }

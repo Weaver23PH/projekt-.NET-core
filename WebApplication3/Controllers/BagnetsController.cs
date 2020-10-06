@@ -58,9 +58,17 @@ namespace WebApplication3.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(bagnet);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (!BagnetNameExists(bagnet.Typ))
+                {
+                    _context.Add(bagnet);
+                    await _context.SaveChangesAsync();
+                    ViewBag.DuplicateMessage = "";
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                {
+                    ViewBag.DuplicateMessage = "This already exists";
+                }
             }
             return View(bagnet);
         }
@@ -148,6 +156,17 @@ namespace WebApplication3.Controllers
         private bool BagnetExists(int id)
         {
             return _context.Bagnety.Any(e => e.Id == id);
+        }
+
+        private bool BagnetNameExists( string checkedName)
+        {
+            List<string> existingMountNames = new List<string>();
+            List<Bagnet> existingMount = (from mount in _context.Bagnety select mount).ToList();
+            foreach (Bagnet mount in existingMount)
+            {
+                existingMountNames.Add(mount.Typ);
+            }
+            return existingMountNames.Contains(checkedName);
         }
     }
 }

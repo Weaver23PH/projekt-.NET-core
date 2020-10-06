@@ -1,7 +1,11 @@
-﻿@model IEnumerable<WebApplication3.Models.Bagnet>
-
+﻿@using Microsoft.AspNetCore.Identity;
+@model IEnumerable<WebApplication3.Models.Bagnet>
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
 @{
     ViewData["Title"] = "Mount List";
+    IdentityUser user;
+    IList<String> roles;
 }
 @section PageHead{
     <div class="container">
@@ -32,7 +36,14 @@
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                     <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        user = await UserManager.FindByNameAsync(User.Identity.Name);
+                        roles = await UserManager.GetRolesAsync(user);
+                        @if (roles.Contains("Admin"))
+                        {
+                            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>}
+                    }
                 </td>
             </tr>
         }
