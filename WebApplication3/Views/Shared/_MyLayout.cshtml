@@ -31,10 +31,10 @@
 <body style="height: 90vh; width: 98vw;">
     <header class="row h-25">
 
-        <div class="col-2 boxedContent">
+        <div class="col-2 boxedContent" id="WerraLogoContainer">
             <div id="WerraLogo"></div>
         </div>
-        <div class="col-2 boxedContent">
+        <div class="col-2 boxedContent" id="LoginContainer">
             <div class="mx-auto d-flex justify-content-center">
                 @if (SignInManager.IsSignedIn(User))
 
@@ -58,15 +58,15 @@
                 }
             </div>
         </div>
-        <div class="col-8 boxedContent">
+        <div class="col-8 boxedContent" id="TitlebarContainer">
             <div>
                 @RenderSection("PageHead", required: false)
             </div>
         </div>
     </header>
     <main class="row h-75">
-        <div class="col-3 boxedContent h-100">
-            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-transparent box-shadow mb-3 flex-sm-column-reverse">
+        <div class="col-3 boxedContent navBarContent h-100">
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-transparent  overflow-auto  box-shadow mb-3 flex-sm-column-reverse">
                 <div class="container-fluid">
                     <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-column-reverse">
                         <ul class="navbar-nav flex-grow-1 flex-sm-column" id="navbar">
@@ -155,6 +155,22 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script>$(window).on('resize', function () {
+            var win = $(this);
+            if (win.width() < 800) {
+
+                $('#LoginContainer').removeClass('col-2');
+                $('#LoginContainer').addClass('col-3');
+                $('#TitlebarContainer').removeClass('col-8');
+                $('#TitlebarContainer').addClass('col-9');
+
+            } else {
+                $('#LoginContainer').removeClass('col-3');
+                $('#LoginContainer').addClass('col-2');
+                $('#TitlebarContainer').removeClass('col-9');
+                $('#TitlebarContainer').addClass('col-8');
+            }
+        });</script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

@@ -13,7 +13,7 @@ namespace WebApplication3.Models
         [Key]
         public int Id { get; set; }
         [MaxLength(50)]
-        [RegularExpression(@"([A-Z'?a-z](-?|\s?)){3,50}",
+        [RegularExpression(@"([A-Za-z]+(-?|'?\s?)){3,50}",
          ErrorMessage = "Characters are not allowed.")]
         [Required(ErrorMessage = "Name is required!")]
         [Display(Name = "Producer")]
@@ -21,14 +21,14 @@ namespace WebApplication3.Models
             ErrorMessage = "Must have at least 3 letters/signs", MinimumLength = 3)]
         public string Producent { get; set; }
         [MaxLength(50)]
-        [RegularExpression(@"([A-Z'?a-z](-?|\s?)){3,50}",
+        [RegularExpression(@"([A-Za-z]+(-?|'?\s?)){3,50}",
          ErrorMessage = "Characters are not allowed.")]
         [Display(Name = "Country")]
         [StringLength(50,
            ErrorMessage = "Must have at least 3 letters/signs", MinimumLength = 3)]
         public string KrajPochodzenia { get; set; }
         [MaxLength (50)]
-        [RegularExpression(@"([A-Z'?a-z](-?|\s)?\d*){1,50}",
+        [RegularExpression(@"([A-Za-z]+-?|\s?\d*){1,50}",
          ErrorMessage = "Characters are not allowed.")]
         [Display(Name = "Model")]
         public string Model { get; set; }

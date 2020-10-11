@@ -1,6 +1,10 @@
 /* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
-
+@media (max-width: 770px){
+    #WerraLogoContainer {
+        display: none;
+    }
+}
 a.navbar-brand {
     white-space: normal;
     text-align: center;
@@ -162,9 +166,9 @@ div#calculator {
     height: 100%;
 }
 
-.mainContent {
+.mainContent, .navBarContent {
     min-height: 50%;
-    overflow: auto !important;
+    overflow-y: auto !important;
     display: inline-block;
 }
 
