@@ -42,8 +42,11 @@ namespace WebApplication3.Controllers
             {
                 return NotFound();
             }
-
-            return View(aparatViewModel);
+            if (Request.Cookies["currentPageCookie"] != null)
+            {
+                ViewBag.ReturnCat = (int.Parse(Request.Cookies["currentPageCookie"]));
+            }
+                return View(aparatViewModel);
         }
 
         // GET: AparatViewModel/Create

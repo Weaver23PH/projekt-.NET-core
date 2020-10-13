@@ -191,7 +191,7 @@ namespace WebApplication3.Controllers
                 id = 1;
             }
 
-            Response.Cookies.Append("currentPageCookie", id.ToString(), option);
+                Response.Cookies.Append("currentPageCookie", id.ToString(), option);
 
             kategoria = _context.Kategorie.Find(id);
             katUpper = _context.Kategorie.Find(id).UpperCategoryId;
@@ -207,11 +207,11 @@ namespace WebApplication3.Controllers
             else
             {
                 x = (int)id;
+                Response.Cookies.Append("currentPageCookie", id.ToString(), option);
             }
-            if ((Request.Cookies["currentPageCookie"] != null)  && ((int.Parse(Request.Cookies["currentPageCookie"])) != (int)id))
+            if ((Request.Cookies["currentPageCookie"] != null) && ((int.Parse(Request.Cookies["currentPageCookie"])) != (int)id))
             {
                 x = (int)id;
-                Response.Cookies.Append("currentPageCookie", id.ToString(), option);
             }
             ViewBag.SubCategories = (from category in _context.Kategorie where category.UpperCategoryId == x select category).ToList();
             ViewBag.UpperCategory = _context.Kategorie.FirstOrDefault(x => (x.Id == kategoria.UpperCategoryId));
@@ -238,8 +238,6 @@ namespace WebApplication3.Controllers
             }
 
             ViewBag.Aparaty = ListaDisplAP;
-
-
 
             return View(kategoria);
         }

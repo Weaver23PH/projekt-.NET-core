@@ -63,6 +63,6 @@
 <div>
     <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
     <a asp-action="Index">Back To List</a> |
-    <a asp-controller="AparatKategoria" asp-action="Menu">Back to categories</a> |
+    <a asp-controller="AparatKategoria" asp-action="Menu" asp-route-id=@ViewBag.ReturnCat>Back to categories</a> |
     @Html.ActionLink("Add To Bag", "AddAparatToEquipmentBag", "EquipmentBag", new { id = Model.Id })
 </div>
