@@ -3,7 +3,7 @@ using Identity.Models;
 using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
 using System;
-using Identity.Email;
+
 using Microsoft.AspNetCore.Authorization;
 
 namespace Identity.Controllers
@@ -50,16 +50,10 @@ namespace Identity.Controllers
                 {
                     var token = await userManager.GenerateEmailConfirmationTokenAsync(IdentityUser);
                     var confirmationLink = Url.Action("ConfirmEmail", "Email", new { token, email = user.Email }, Request.Scheme);
-                    EmailHelper emailHelper = new EmailHelper();
-                    bool emailResponse = emailHelper.SendEmail(user.Email, confirmationLink);
+
                  //   await userManager.AddToRoleAsync(IdentityUser, Role);
 
-                    if (emailResponse)
-                        return RedirectToAction("Index");
-                    else
-                    {
-                        // log email failed 
-                    }
+                   
                 }
                 else
                 {

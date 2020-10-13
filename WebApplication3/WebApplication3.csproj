@@ -6,6 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Email\**" />
+    <Content Remove="Email\**" />
+    <EmbeddedResource Remove="Email\**" />
+    <None Remove="Email\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="Models\AppUser.cs" />
   </ItemGroup>
 

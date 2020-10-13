@@ -39,9 +39,7 @@ namespace WebApplication3.Controllers
             {
                 return NotFound();
             }
-            CookieOptions option = new CookieOptions();
-            option.Expires = DateTime.Now.AddMinutes(3);
-            Response.Cookies.Append("currentPageCookie", id.ToString(), option);
+
             var aparatKategoria = await _context.Kategorie
                 .Include(a => a.UpperCategory)
                 .FirstOrDefaultAsync(m => m.Id == id);
@@ -75,184 +73,187 @@ namespace WebApplication3.Controllers
                 {
                     _context.Add(aparatKategoria);
                     await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index));
                     ViewBag.DuplicateMessage = "";
+                    return RedirectToAction(nameof(Index));
                 }
                 else
                 {
                     ViewBag.DuplicateMessage = "This already exists";
                 }
             }
-                ViewData["UpperCategoryId"] = new SelectList(_context.Kategorie, "Id", "Name", aparatKategoria.UpperCategoryId);
-                return View(aparatKategoria);
+            ViewData["UpperCategoryId"] = new SelectList(_context.Kategorie, "Id", "Name", aparatKategoria.UpperCategoryId);
+            return View(aparatKategoria);
+        }
+
+        // GET: AparatKategoria/Edit/5
+        [Authorize(Roles = "Category-Manager")]
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
             }
 
-            // GET: AparatKategoria/Edit/5
-            [Authorize(Roles = "Category-Manager")]
-            public async Task<IActionResult> Edit(int? id)
+            var aparatKategoria = await _context.Kategorie.FindAsync(id);
+            if (aparatKategoria == null)
             {
-                if (id == null)
-                {
-                    return NotFound();
-                }
+                return NotFound();
+            }
+            ViewData["UpperCategoryId"] = new SelectList(_context.Kategorie, "Id", "Name", aparatKategoria.UpperCategoryId);
+            return View(aparatKategoria);
+        }
 
-                var aparatKategoria = await _context.Kategorie.FindAsync(id);
-                if (aparatKategoria == null)
-                {
-                    return NotFound();
-                }
-                ViewData["UpperCategoryId"] = new SelectList(_context.Kategorie, "Id", "Name", aparatKategoria.UpperCategoryId);
-                return View(aparatKategoria);
+        // POST: AparatKategoria/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Category-Manager")]
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,UpperCategoryId")] AparatKategoria aparatKategoria)
+        {
+            if (id != aparatKategoria.Id)
+            {
+                return NotFound();
             }
 
-            // POST: AparatKategoria/Edit/5
-            // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-            // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-            [HttpPost]
-            [ValidateAntiForgeryToken]
-            [Authorize(Roles = "Category-Manager")]
-            public async Task<IActionResult> Edit(int id, [Bind("Id,Name,UpperCategoryId")] AparatKategoria aparatKategoria)
+            if (ModelState.IsValid)
             {
-                if (id != aparatKategoria.Id)
+                try
                 {
-                    return NotFound();
+                    _context.Update(aparatKategoria);
+                    await _context.SaveChangesAsync();
                 }
-
-                if (ModelState.IsValid)
+                catch (DbUpdateConcurrencyException)
                 {
-                    try
+                    if (!AparatKategoriaExists(aparatKategoria.Id))
                     {
-                        _context.Update(aparatKategoria);
-                        await _context.SaveChangesAsync();
-                    }
-                    catch (DbUpdateConcurrencyException)
-                    {
-                        if (!AparatKategoriaExists(aparatKategoria.Id))
-                        {
-                            return NotFound();
-                        }
-                        else
-                        {
-                            throw;
-                        }
-                    }
-                    return RedirectToAction(nameof(Index));
-                }
-                ViewData["UpperCategoryId"] = new SelectList(_context.Kategorie, "Id", "Name", aparatKategoria.UpperCategoryId);
-                return View(aparatKategoria);
-            }
-
-            // GET: AparatKategoria/Delete/5
-            [Authorize(Roles = "Category-Manager")]
-            public async Task<IActionResult> Delete(int? id)
-            {
-                if (id == null)
-                {
-                    return NotFound();
-                }
-
-                var aparatKategoria = await _context.Kategorie
-                    .Include(a => a.UpperCategory)
-                    .FirstOrDefaultAsync(m => m.Id == id);
-                if (aparatKategoria == null)
-                {
-                    return NotFound();
-                }
-
-                return View(aparatKategoria);
-            }
-
-            // POST: AparatKategoria/Delete/5
-            [HttpPost, ActionName("Delete")]
-            [ValidateAntiForgeryToken]
-            [Authorize(Roles = "Category-Manager")]
-            public async Task<IActionResult> DeleteConfirmed(int id)
-            {
-                var aparatKategoria = await _context.Kategorie.FindAsync(id);
-                _context.Kategorie.Remove(aparatKategoria);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-
-            private bool AparatKategoriaExists(int id)
-            {
-                return _context.Kategorie.Any(e => e.Id == id);
-            }
-            public IActionResult Menu(int? id)
-            {
-                AparatKategoria kategoria = null;
-                int? katUpper = 0;
-                int? x;
-
-
-                List<AparatViewModel> ListaDisplAP = new List<AparatViewModel>();
-                if (id == null)
-                {
-                    id = 1;
-                }
-
-
-                if (Request.Cookies["currentPageCookie"] != null)
-                {
-                    id = int.Parse(Request.Cookies["currentPageCookie"]);
-                }
-
-                kategoria = _context.Kategorie.Find(id);
-                katUpper = _context.Kategorie.Find(id).UpperCategoryId;
-
-                if (kategoria == null)
-                {
-                    return NotFound();
-                }
-                if (Request.Cookies["currentPageCookie"] != null)
-                {
-                    x = (int.Parse(Request.Cookies["currentPageCookie"]));
-                }
-                else
-                {
-                    x = (int)id;
-                }
-                ViewBag.SubCategories = (from category in _context.Kategorie where category.UpperCategoryId == x select category).ToList();
-                ViewBag.UpperCategory = _context.Kategorie.FirstOrDefault(x => (x.Id == kategoria.UpperCategoryId));
-                List<AparatViewModel> ListaAP = (from aparat in _context.Aparaty select aparat).ToList();
-                foreach (AparatViewModel ap in ListaAP)
-                {
-                    int LocalCat = ap.AparatKategoriaId;
-                    if (LocalCat == x)
-                    {
-                        ListaDisplAP.Add(ap);
+                        return NotFound();
                     }
                     else
                     {
-                        while (_context.Kategorie.Find(LocalCat).UpperCategoryId.HasValue)
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            ViewData["UpperCategoryId"] = new SelectList(_context.Kategorie, "Id", "Name", aparatKategoria.UpperCategoryId);
+            return View(aparatKategoria);
+        }
+
+        // GET: AparatKategoria/Delete/5
+        [Authorize(Roles = "Category-Manager")]
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var aparatKategoria = await _context.Kategorie
+                .Include(a => a.UpperCategory)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (aparatKategoria == null)
+            {
+                return NotFound();
+            }
+
+            return View(aparatKategoria);
+        }
+
+        // POST: AparatKategoria/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Category-Manager")]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var aparatKategoria = await _context.Kategorie.FindAsync(id);
+            _context.Kategorie.Remove(aparatKategoria);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        private bool AparatKategoriaExists(int id)
+        {
+            return _context.Kategorie.Any(e => e.Id == id);
+        }
+        public IActionResult Menu(int? id)
+        {
+            CookieOptions option = new CookieOptions();
+            option.Expires = DateTime.Now.AddMinutes(3);
+            AparatKategoria kategoria = null;
+            int? katUpper = 0;
+            int? x;
+            List<AparatViewModel> ListaDisplAP = new List<AparatViewModel>();
+
+
+            if (id == null)
+            {
+                id = 1;
+            }
+
+            Response.Cookies.Append("currentPageCookie", id.ToString(), option);
+
+            kategoria = _context.Kategorie.Find(id);
+            katUpper = _context.Kategorie.Find(id).UpperCategoryId;
+
+            if (kategoria == null)
+            {
+                return NotFound();
+            }
+            if (Request.Cookies["currentPageCookie"] != null)
+            {
+                x = (int.Parse(Request.Cookies["currentPageCookie"]));
+            }
+            else
+            {
+                x = (int)id;
+            }
+            if ((Request.Cookies["currentPageCookie"] != null)  && ((int.Parse(Request.Cookies["currentPageCookie"])) != (int)id))
+            {
+                x = (int)id;
+                Response.Cookies.Append("currentPageCookie", id.ToString(), option);
+            }
+            ViewBag.SubCategories = (from category in _context.Kategorie where category.UpperCategoryId == x select category).ToList();
+            ViewBag.UpperCategory = _context.Kategorie.FirstOrDefault(x => (x.Id == kategoria.UpperCategoryId));
+            List<AparatViewModel> ListaAP = (from aparat in _context.Aparaty select aparat).ToList();
+            foreach (AparatViewModel ap in ListaAP)
+            {
+                int LocalCat = ap.AparatKategoriaId;
+                if (LocalCat == x)
+                {
+                    ListaDisplAP.Add(ap);
+                }
+                else
+                {
+                    while (_context.Kategorie.Find(LocalCat).UpperCategoryId.HasValue)
+                    {
+                        LocalCat = (int)_context.Kategorie.Find(LocalCat).UpperCategoryId;
+                        if (LocalCat == x)
                         {
-                            LocalCat = (int)_context.Kategorie.Find(LocalCat).UpperCategoryId;
-                            if (LocalCat == x)
-                            {
-                                ListaDisplAP.Add(ap);
-                            }
+                            ListaDisplAP.Add(ap);
                         }
                     }
-
                 }
 
-                ViewBag.Aparaty = ListaDisplAP;
-
-
-
-                return View(kategoria);
-            }
-            private bool KategoriaNameExists(string checkedName)
-            {
-                List<string> existingCategoryNames = new List<string>();
-                List<AparatKategoria> existingCategory = (from category in _context.Kategorie select category).ToList();
-                foreach (AparatKategoria category in existingCategory)
-                {
-                    existingCategoryNames.Add(category.Name);
-                }
-                return existingCategoryNames.Contains(checkedName);
             }
 
+            ViewBag.Aparaty = ListaDisplAP;
+
+
+
+            return View(kategoria);
         }
+        private bool KategoriaNameExists(string checkedName)
+        {
+            List<string> existingCategoryNames = new List<string>();
+            List<AparatKategoria> existingCategory = (from category in _context.Kategorie select category).ToList();
+            foreach (AparatKategoria category in existingCategory)
+            {
+                existingCategoryNames.Add(category.Name);
+            }
+            return existingCategoryNames.Contains(checkedName);
+        }
+
     }
+}
 

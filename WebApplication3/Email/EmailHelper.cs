@@ -30,7 +30,7 @@ namespace Identity.Email
             }
             catch (Exception ex)
             {
-                // log exception
+                Console.Out.WriteLine(ex.Message);
             }
             return false;
         }
@@ -57,7 +57,7 @@ namespace Identity.Email
             }
             catch (Exception ex)
             {
-                // log exception
+                Console.Out.WriteLine(ex.Message);
             }
             return false;
         }
@@ -84,7 +84,7 @@ namespace Identity.Email
             }
             catch (Exception ex)
             {
-                // log exception
+                Console.Out.WriteLine(ex.Message);
             }
             return false;
         }
